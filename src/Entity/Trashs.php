@@ -19,17 +19,17 @@ class Trashs
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $ville;
+    private $city;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $adresse;
+    private $address;
 
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $codeInsee;
+    private $inseeCode;
 
     /**
      * @ORM\Column(type="float")
@@ -57,7 +57,7 @@ class Trashs
     private $capacityMax;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $actualCapacity;
 
@@ -66,38 +66,38 @@ class Trashs
         return $this->id;
     }
 
-    public function getVille(): ?string
+    public function getCity(): ?string
     {
-        return $this->ville;
+        return $this->city;
     }
 
-    public function setVille(string $ville): self
+    public function setCity(string $city): self
     {
-        $this->ville = $ville;
+        $this->city = $city;
 
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adresse;
+        return $this->address;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAddress(string $address): self
     {
-        $this->adresse = $adresse;
+        $this->address = $address;
 
         return $this;
     }
 
-    public function getCodeInsee(): ?string
+    public function getInseeCode(): ?string
     {
-        return $this->codeInsee;
+        return $this->inseeCode;
     }
 
-    public function setCodeInsee(string $codeInsee): self
+    public function setInseeCode(string $inseeCode): self
     {
-        $this->codeInsee = $codeInsee;
+        $this->inseeCode = $inseeCode;
 
         return $this;
     }

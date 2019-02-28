@@ -29,7 +29,7 @@ class Incidents
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $photo;
+    private $picture;
 
     /**
      * @ORM\Column(type="string", length=20)
@@ -39,12 +39,12 @@ class Incidents
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $ville;
+    private $city;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $adresse;
+    private $address;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -67,9 +67,26 @@ class Incidents
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Trashs")
      */
-    private $refBenne;
+    private $trash;
+
+    /**
+     * @return mixed
+     */
+    public function getTrash()
+    {
+        return $this->trash;
+    }
+
+    /**
+     * @param mixed $trash
+     */
+    public function setTrash($trash): void
+    {
+        $this->trash = $trash;
+    }
+
 
     public function getId(): ?int
     {
@@ -100,14 +117,14 @@ class Incidents
         return $this;
     }
 
-    public function getPhoto(): ?string
+    public function getPicture(): ?string
     {
-        return $this->photo;
+        return $this->picture;
     }
 
-    public function setPhoto(?string $photo): self
+    public function setPicture(?string $picture): self
     {
-        $this->photo = $photo;
+        $this->picture = $picture;
 
         return $this;
     }
@@ -124,26 +141,26 @@ class Incidents
         return $this;
     }
 
-    public function getVille(): ?string
+    public function getCity(): ?string
     {
-        return $this->ville;
+        return $this->city;
     }
 
-    public function setVille(string $ville): self
+    public function setCity(string $city): self
     {
-        $this->ville = $ville;
+        $this->city = $city;
 
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adresse;
+        return $this->address;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAddress(string $address): self
     {
-        $this->adresse = $adresse;
+        $this->address = $address;
 
         return $this;
     }
@@ -196,15 +213,4 @@ class Incidents
         return $this;
     }
 
-    public function getRefBenne(): ?string
-    {
-        return $this->refBenne;
-    }
-
-    public function setRefBenne(?string $refBenne): self
-    {
-        $this->refBenne = $refBenne;
-
-        return $this;
-    }
 }

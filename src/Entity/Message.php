@@ -19,12 +19,12 @@ class Message
     /**
      * @ORM\Column(type="integer")
      */
-    private $expediteur;
+    private $sender;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $destinataire;
+    private $receiver;
 
     /**
      * @ORM\Column(type="date")
@@ -34,38 +34,44 @@ class Message
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $titre;
+    private $object;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $contenu;
+    private $content;
+
+    /**
+     * @ORM\Column(type="boolean")
+     *
+     */
+    private $status;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getExpediteur(): ?int
+    public function getSender(): ?int
     {
-        return $this->expediteur;
+        return $this->sender;
     }
 
-    public function setExpediteur(int $expediteur): self
+    public function setSender(int $sender): self
     {
-        $this->expediteur = $expediteur;
+        $this->sender = $sender;
 
         return $this;
     }
 
-    public function getDestinataire(): ?int
+    public function getReceiver(): ?int
     {
-        return $this->destinataire;
+        return $this->receiver;
     }
 
-    public function setDestinataire(int $destinataire): self
+    public function setReceiver(int $receiver): self
     {
-        $this->destinataire = $destinataire;
+        $this->receiver = $receiver;
 
         return $this;
     }
@@ -82,27 +88,37 @@ class Message
         return $this;
     }
 
-    public function getTitre(): ?string
+    public function getObject(): ?string
     {
-        return $this->titre;
+        return $this->object;
     }
 
-    public function setTitre(string $titre): self
+    public function setObject(string $object): self
     {
-        $this->titre = $titre;
+        $this->object = $object;
 
         return $this;
     }
 
-    public function getContenu(): ?string
+    public function getContent(): ?string
     {
-        return $this->contenu;
+        return $this->content;
     }
 
-    public function setContenu(string $contenu): self
+    public function setContent(string $content): self
     {
-        $this->contenu = $contenu;
+        $this->content = $content;
 
         return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status): void
+    {
+        $this->status = $status;
     }
 }

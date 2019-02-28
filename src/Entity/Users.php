@@ -39,7 +39,7 @@ class Users
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $ville;
+    private $city;
 
     /**
      * @ORM\Column(type="array")
@@ -124,14 +124,14 @@ class Users
         return $this;
     }
 
-    public function getVille(): ?string
+    public function getCity(): ?string
     {
-        return $this->ville;
+        return $this->city;
     }
 
-    public function setVille(?string $ville): self
+    public function setCity(?string $city): self
     {
-        $this->ville = $ville;
+        $this->city = $city;
 
         return $this;
     }
