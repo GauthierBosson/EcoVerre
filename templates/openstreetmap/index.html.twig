@@ -11,10 +11,28 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/EcoVerre/src/Controller/OpenstreetmapController.php'|file_link(0) }}">src/Controller/OpenstreetmapController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/EcoVerre/templates/openstreetmap/index.html.twig'|file_link(0) }}">templates/openstreetmap/index.html.twig</a></code></li>
-    </ul>
+    Affichage de la carte :
+
+    <div id="mapid" style="height: 180px;"></div>
+
+    <script>
+
+        window.onload = function () {
+            console.log('Page chargée ');
+
+            var map = L.map('mapid').setView([51.505, -0.09], 13);
+
+            var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
+            }).addTo(map);
+        }
+
+    </script>
+
+
+
 </div>
 {% endblock %}
