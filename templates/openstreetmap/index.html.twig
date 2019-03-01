@@ -41,11 +41,24 @@
 
             var map = L.map('map').setView([43.6005, 1.3472], 11);
 
+
+
+
             var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 maxZoom: 18,
                 id: 'mapbox.streets',
                 accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
             }).addTo(map);
+
+
+            // Nous initialisons une liste de marqueurs
+            var marker = {
+                "site1" : {"lat": 43.6004, "lon": 1.4537 },
+                "site2" : {"lat": 43.6004, "lon": 1.4537 },
+                "site3" : {"lat": 43.6004, "lon": 1.4537 },
+                "site1" : {"lat": 43.6004, "lon": 1.4537 },
+            }.addTo(map);
+            marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
         }
 
     </script>
@@ -54,6 +67,13 @@
 
 
 
+    // Nous initialisons une liste de marqueurs
+    var villes = {
+    "Paris": { "lat": 48.852969, "lon": 2.349903 },
+    "Brest": { "lat": 48.383, "lon": -4.500 },
+    "Quimper": { "lat": 48.000, "lon": -4.100 },
+    "Bayonne": { "lat": 43.500, "lon": -1.467 }
+    };
 {% endblock %}
 
 
