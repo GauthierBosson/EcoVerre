@@ -13,6 +13,7 @@ require('../css/app.css');
 const $ = require('jQuery');
 global.$ = global.jQuery = $;
 
+require('leaflet');
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 
 
