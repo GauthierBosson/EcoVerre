@@ -1,11 +1,33 @@
 security:
+    role_hierarchy:
+        ROLE_USER: [ROLE_USER, ROLE_SONATA_ADMIN]
+        SONATA:
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
+    encoders:
+        App\Entity\Users: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        users:
+            id: App\Security\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        user:
+            pattern: /user(.*)
+            form_login:
+                provider: users
+                login_path: user_login
+                use_forward: false
+                check_path: user_login
+                failure_path: null
+            logout:
+                path: user_logout
+                target: user_login
+            anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\UserLoginAuthenticator
         main:
             anonymous: true
 
@@ -20,5 +42,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/user/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/, role: [ROLE_USER, ROLE_SONATA_ADMIN] }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
