@@ -7,6 +7,11 @@ parameters:
     locale: 'en'
 
 services:
+    admin.user:
+        class: App\Admin\TrashAdmin
+        arguments: [~, App\Entity\Trashs, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, label: Trashs }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
