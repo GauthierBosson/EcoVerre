@@ -19,15 +19,33 @@ class TrashAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('city', TextType::class);
-        $formMapper->add('address', TextType::class);
-        $formMapper->add('inseeCode', TextType::class);
-        $formMapper->add('latitude', TextType::class);
-        $formMapper->add('longitude', TextType::class);
-        $formMapper->add('altitude', TextType::class);
-        $formMapper->add('reference', TextType::class);
-        $formMapper->add('capacityMax', TextType::class);
-        $formMapper->add('actualCapacity', TextType::class);
+        $formMapper->add('city', TextType::class, [
+            'label' => 'Ville'
+        ]);
+        $formMapper->add('address', TextType::class, [
+            'label' => 'Adresse'
+        ]);
+        $formMapper->add('inseeCode', TextType::class, [
+            'label' => 'Code Insee'
+        ]);
+        $formMapper->add('latitude', TextType::class, [
+            'label' => 'Latitude'
+        ]);
+        $formMapper->add('longitude', TextType::class, [
+            'label' => 'Longitude'
+        ]);
+        $formMapper->add('altitude', TextType::class, [
+            'label' => 'Altitude'
+        ]);
+        $formMapper->add('reference', TextType::class, [
+            'label' => 'Référence'
+        ]);
+        $formMapper->add('capacityMax', TextType::class, [
+            'label' => 'Capacité maximum'
+        ]);
+        $formMapper->add('actualCapacity', TextType::class, [
+            'label' => 'Capacité actuelle'
+        ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -37,6 +55,14 @@ class TrashAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('city');
+        $listMapper->add('reference', TextType::class, [
+            'label' => 'Référence'
+        ]);
+        $listMapper->add('address', TextType::class, [
+            'label' => 'Adresse'
+        ]);
+        $listMapper->add('actualCapacity', TextType::class, [
+            'label' => 'Capacité actuelle'
+        ]);
     }
 }
