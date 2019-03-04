@@ -13,6 +13,7 @@
 
 
 
+
 {% endblock %}
 
 {% block title %}Hello OpenstreetmapController!{% endblock %}
@@ -32,6 +33,8 @@
 
     {% block javascripts %}
 
+    <script src="{{ asset('js/recup-verre.geojson') }}"></script>
+
     <script>
 
 
@@ -40,40 +43,45 @@
             console.log('Page chargée ');
 
             var map = L.map('map').setView([43.6005, 1.3472], 11);
-
-
-
-
             var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 maxZoom: 18,
                 id: 'mapbox.streets',
                 accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
             }).addTo(map);
 
+            // création d’une couche geoJson qui appelle le fichier « recup-verre.geojson »
+            var verre= $.getJSON("recup-verre.geojson",function(dataVerre)
+            // icone benne
+            {var iconeVERRE = L.icon({
+                iconUrl : {{ asset('img/verre.png') }},
+                iconSize : [19, 21]
+            });
+            // fonction pointToLayer qui ajoute la couche « verre » à la carte, selon la symbologie « iconeVERRE », et paramètre la popup
+                L.geoJson(dataVerre,{
+                    pointToLayer : function(feature,latlng){
+                        var marker = L.marker(latlng,{icon: iconeVERRE});
+                        marker.bindPopup('<b><u>Description du cinéma</u></b><br>'
+                        + '<b>Commune:</b>'+ feature.properties.communes + '<br>'
+                        + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
+                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
+                    );
+                        return marker ;
+                    }
+                }).addTo(map);
+            });
 
-            // Nous initialisons une liste de marqueurs
-            var marker = {
-                "site1" : {"lat": 43.6004, "lon": 1.4537 },
-                "site2" : {"lat": 43.6004, "lon": 1.4537 },
-                "site3" : {"lat": 43.6004, "lon": 1.4537 },
-                "site1" : {"lat": 43.6004, "lon": 1.4537 },
-            }.addTo(map);
-            marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+            // var marker = L.marker([43.66748069690011, 1.427829654237054]).addTo(map);
+
         }
+
+
+
 
     </script>
     {% endblock %}
 
 
-
-
-    // Nous initialisons une liste de marqueurs
-    var villes = {
-    "Paris": { "lat": 48.852969, "lon": 2.349903 },
-    "Brest": { "lat": 48.383, "lon": -4.500 },
-    "Quimper": { "lat": 48.000, "lon": -4.100 },
-    "Bayonne": { "lat": 43.500, "lon": -1.467 }
-    };
 {% endblock %}
 
 
