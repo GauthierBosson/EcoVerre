@@ -19,16 +19,24 @@ class TrashAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name', TextType::class);
+        $formMapper->add('city', TextType::class);
+        $formMapper->add('address', TextType::class);
+        $formMapper->add('inseeCode', TextType::class);
+        $formMapper->add('latitude', TextType::class);
+        $formMapper->add('longitude', TextType::class);
+        $formMapper->add('altitude', TextType::class);
+        $formMapper->add('reference', TextType::class);
+        $formMapper->add('capacityMax', TextType::class);
+        $formMapper->add('actualCapacity', TextType::class);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
+        $datagridMapper->add('city');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name');
+        $listMapper->addIdentifier('city');
     }
 }
