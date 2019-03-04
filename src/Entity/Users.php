@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  */
-class Users
+class Users implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -44,7 +45,7 @@ class Users
     /**
      * @ORM\Column(type="array")
      */
-    private $role = [];
+    private $roles = [];
 
     /**
      * @ORM\Column(type="date")
@@ -136,14 +137,14 @@ class Users
         return $this;
     }
 
-    public function getRole(): ?array
+    public function getRoles(): ?array
     {
-        return $this->role;
+        return $this->roles;
     }
 
-    public function setRole(array $role): self
+    public function setRoles($roles): self
     {
-        $this->role[] = $role;
+        $this->roles[] = $roles;
 
         return $this;
     }
@@ -206,5 +207,38 @@ class Users
         $this->isDoubleAuth = $isDoubleAuth;
 
         return $this;
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->getEmail();
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        return null;
     }
 }
