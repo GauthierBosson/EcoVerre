@@ -33,7 +33,6 @@
 
     {% block javascripts %}
 
-    <script src="{{ asset('js/recup-verre.geojson') }}"></script>
 
     <script>
 
@@ -49,33 +48,24 @@
                 accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
             }).addTo(map);
 
-            // création d’une couche geoJson qui appelle le fichier « recup-verre.geojson »
-            var verre= $.getJSON("recup-verre.geojson",function(dataVerre)
-            // icone benne
-            {var iconeVERRE = L.icon({
-                iconUrl : {{ asset('img/verre.png') }},
-                iconSize : [19, 21]
-            });
-            // fonction pointToLayer qui ajoute la couche « verre » à la carte, selon la symbologie « iconeVERRE », et paramètre la popup
-                L.geoJson(dataVerre,{
-                    pointToLayer : function(feature,latlng){
-                        var marker = L.marker(latlng,{icon: iconeVERRE});
-                        marker.bindPopup('<b><u>Description du cinéma</u></b><br>'
-                        + '<b>Commune:</b>'+ feature.properties.communes + '<br>'
+            L.geoJson([verre], {
+                style: function (feature) {
+                    return feature.properties && feature.properties.style;
+                },
+                pointToLayer: function (feature, latlng) {
+                    var marker = L.marker(latlng);
+                    marker.bindPopup('<b><u>Description de la benne</u></b><br>'
+                        + '<b>Commune:</b>'+ feature.properties.commune + '<br>'
                         + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
                         + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
                     );
-                        return marker ;
-                    }
-                }).addTo(map);
-            });
+                    return marker ;
 
+                }
+            }).addTo(map);
 
-            // var marker = L.marker([43.66748069690011, 1.427829654237054]).addTo(map);
 
         }
-
-
 
 
     </script>

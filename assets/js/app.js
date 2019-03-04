@@ -14,6 +14,9 @@ const $ = require('jQuery');
 global.$ = global.jQuery = $;
 
 require('leaflet');
+//require('../../src/Trash/recup-verre.geojson');
+
+
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 
 
