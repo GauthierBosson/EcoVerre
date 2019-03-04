@@ -31,8 +31,7 @@ class OpenstreetmapController extends AbstractController
          // $jsonFiles = $fileLocator->locate('recup-verre.geojson', null, false);
 
 
-         $fp = file_get_contents('C:\xampp\htdocs\EcoVerre\src\Repository\json\recup-verre.geojson');
-         $fp = json_decode($fp);
+         $fp = file_get_contents('C:\xampp\htdocs\EcoVerre\src\Repository\json\recup.js');
          dump($fp);
 
 
