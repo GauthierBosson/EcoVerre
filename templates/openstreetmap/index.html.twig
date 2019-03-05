@@ -45,10 +45,8 @@
                 accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
             }).addTo(map);
 
-
-
             // Add baseLayers to the map
-            geojson = L.geoJson( {
+            geojson = L.geoJson(Verre, {
                 style: function (feature) {
                     return feature.properties && feature.properties.style;
                 },
