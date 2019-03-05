@@ -7,7 +7,7 @@ parameters:
     locale: 'en'
 
 services:
-    admin.user:
+    admin.trash:
         class: App\Admin\TrashAdmin
         arguments: [~, App\Entity\Trashs, ~]
         tags:

@@ -9,6 +9,7 @@
 namespace App\Admin;
 
 
+use App\Entity\Trashs;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -51,6 +52,14 @@ class TrashAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('city');
+        $datagridMapper->add('address');
+        $datagridMapper->add('inseeCode');
+        $datagridMapper->add('latitude');
+        $datagridMapper->add('longitude');
+        $datagridMapper->add('altitude');
+        $datagridMapper->add('reference');
+        $datagridMapper->add('capacityMax');
+        $datagridMapper->add('actualCapacity');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -64,5 +73,12 @@ class TrashAdmin extends AbstractAdmin
         $listMapper->add('actualCapacity', TextType::class, [
             'label' => 'Capacité actuelle'
         ]);
+    }
+
+    public function toString($object)
+    {
+        return $object instanceof Trashs
+            ? $object->getReference()
+            : 'Trash';
     }
 }
