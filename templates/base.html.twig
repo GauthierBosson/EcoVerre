@@ -11,6 +11,30 @@
             <!-- Renders a link tag (if your module requires any CSS)
                  <link rel="stylesheet" href="/build/app.css"> -->
 
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+            <title>Green World</title>
+
+            <!-- Bootstrap core CSS -->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+            <!-- Custom fonts for this template -->
+            <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+            <link href="css/style.css" rel="stylesheet" type="text/css">
+
+
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+                  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+                  crossorigin=""/>
+
+            <!-- Make sure you put this AFTER Leaflet's CSS -->
+            <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+                    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+                    crossorigin=""></script>
+
         {% endblock %}
     </head>
 
@@ -25,6 +49,46 @@
             <!-- Renders app.js & a webpack runtime.js file
                 <script src="/build/runtime.js"></script>
                 <script src="/build/app.js"></script> -->
+
+
+
+
+                <script>
+
+
+
+                    window.onload = function () {
+                        console.log('Page chargée ');
+
+                        var map = L.map('map').setView([43.6005, 1.3472], 11);
+                        var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                            maxZoom: 18,
+                            id: 'mapbox.streets',
+                            accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
+                        }).addTo(map);
+
+                        // Add baseLayers to the map
+                        geojson = L.geoJson(Verre, {
+                            style: function (feature) {
+                                return feature.properties && feature.properties.style;
+                            },
+                            pointToLayer: function (feature, latlng) {
+                                var marker =  L.marker(latlng);
+                                marker.bindPopup('<b><u>Description de la benne</u></b><br>'
+                                    + '<b>Commune:</b>'+ feature.properties.commune + '<br>'
+                                    + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
+                                    + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
+                                );
+                                return marker ;
+
+                            }
+                        }).addTo(map);
+
+
+                    }
+
+                </script>
+
 
         {% endblock %}
     </body>
