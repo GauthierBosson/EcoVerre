@@ -25,8 +25,10 @@ class IncidentAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $ref = random_bytes(10);
+
         $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
-        dump($user->getEmail());
+
         $formMapper->add('date', DateType::class, [
             'label' => 'Date'
         ]);
@@ -34,31 +36,13 @@ class IncidentAdmin extends AbstractAdmin
             'class' => Trashs::class,
             'choice_label' => 'reference'
         ]);
-        $formMapper->add('address', TextType::class, [
-            'label' => 'Adresse'
-        ]);
         $formMapper->add('email', HiddenType::class, [
             'label' => 'Email',
             'data' => $user->getEmail()
         ]);
         $formMapper->add('reference', HiddenType::class, [
-            'data' => 'bidon'
-        ]);
-        $formMapper->add('city', HiddenType::class, [
-            'label' => 'Ville',
-            'data' => 'Toulouse'
-        ]);
-        $formMapper->add('latitude', HiddenType::class, [
-            'label' => 'Latitude',
-            'data' => 6789.6789
-        ]);
-        $formMapper->add('longitude', HiddenType::class, [
-            'label' => 'Longitude',
-            'data' => 67867.7897
-        ]);
-        $formMapper->add('altitude', HiddenType::class, [
-            'label' => 'Altidue',
-            'data' => 789.5678
+            'label' => 'Référence',
+            'data' => bin2hex($ref)
         ]);
         $formMapper->add('description', TextareaType::class, [
             'label' => 'Description'
@@ -68,13 +52,8 @@ class IncidentAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('date');
-        $datagridMapper->add('address');
         $datagridMapper->add('email');
         $datagridMapper->add('reference');
-        $datagridMapper->add('city');
-        $datagridMapper->add('latitude');
-        $datagridMapper->add('longitude');
-        $datagridMapper->add('altitude');
         $datagridMapper->add('description');
     }
 
@@ -82,12 +61,6 @@ class IncidentAdmin extends AbstractAdmin
     {
         $listMapper->add('reference', TextType::class, [
             'label' => 'Référence'
-        ]);
-        $listMapper->add('address', TextType::class, [
-            'label' => 'Adresse'
-        ]);
-        $listMapper->add('actualCapacity', TextType::class, [
-            'label' => 'Capacité actuelle'
         ]);
     }
 
