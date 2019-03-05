@@ -25,6 +25,8 @@ class IncidentAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+        dump($user->getEmail());
         $formMapper->add('date', DateType::class, [
             'label' => 'Date'
         ]);
@@ -37,7 +39,7 @@ class IncidentAdmin extends AbstractAdmin
         ]);
         $formMapper->add('email', HiddenType::class, [
             'label' => 'Email',
-            'data' => 'test@test'
+            'data' => $user->getEmail()
         ]);
         $formMapper->add('reference', HiddenType::class, [
             'data' => 'bidon'
