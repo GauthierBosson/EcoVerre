@@ -25,39 +25,23 @@ class WidgetController extends Controller {
         DriverManager::loadDriver(WebDriver::class);
         $botman = BotManFactory::create([]); //No config options required
 
-        //Setup DialogFlow middleware
-     /*   $dialogflow = ApiAi::create($this->getParameter('DIALOGFLOW_TOKEN'))->listenForAction();
-        $botman->middleware->received($dialogflow);
-*/
-        // Give the bot some things to listen for.
+
         $botman->hears('(hello|hi|hey)', function (BotMan $bot) use ($botService) {
             $bot->reply($botService->handleHello());
         });
 
-        $botman->hears('(what night|when) is club night.*', function (BotMan $bot) use ($botService) {
-            $bot->reply($botService->handleClubNights());
+        $botman->hears('(Ou|ou|Où|où) se trouve le rapport (d\'incidents|d\'incident) ?', function (BotMan $bot) use ($botService) {
+            $bot->reply($botService->handleIncident());
         });
-        $botman->hears('(Pouvez-vous|Peut-tu) me dire au revoir', function(BotMan $bot) use ($botService){
-            $bot->reply($botService->handleGoodbye());
-    });
-/*
-        $botman->hears('_THISWEEK_', function (Botman $bot) use ($botService) {
-            $bot->reply($botService->handleThisWeeksActivities());
-        })->middleware($dialogflow);
 
-        $botman->hears('_ENROLMENT_', function (Botman $bot) use ($botService) {
-            //$extras = $bot->getMessage()->getExtras();
-            $bot->reply($botService->handleEnrolment());
-        })->middleware($dialogflow);
+        $botman->hears('(Qui|qui) est le référend de ma ville ?', function (BotMan $bot) use ($botService) {
+           $bot->reply($botService->handleReferend());
+        });
 
-        $botman->hears('_INSURANCE_', function (Botman $bot) use ($botService) {
-            $bot->reply($botService->handleInsurance());
-        })->middleware($dialogflow);
+        $botman->hears('(Qui|qui) prévenir en cas (d\'incident|d\'incidents) ?', function (BotMan $bot) use ($botService) {
+            $bot->reply($botService->handleReferend2());
+        });
 
-   /*     $botman->hears('_MEMBERSHIP_', function (Botman $bot) use ($botService) {
-            $bot->reply($botService->handleMembership());
-        })->middleware($dialogflow);
-*/
         // Start listening
         $botman->listen();
 
