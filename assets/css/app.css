@@ -37,6 +37,23 @@ h6 {
     font-weight: 400;
 }
 
+h3,
+h5 {
+    color: #39b577;
+}
+
+a {
+    color: #39b577 !important;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #39b577 !important;
+    border-color: #39b577 !important;
+}
+
 
 
 header.masthead .overlay {
@@ -88,6 +105,14 @@ header.masthead .overlay {
 }
 
 
+.verre {
+    width: 80%;
+}
+
+.circuit {
+    width: 100%;
+}
+
 
 
 .contact {
@@ -112,5 +137,4 @@ footer.footer {
     padding-top: 4rem;
     padding-bottom: 4rem;
 }
-
 
