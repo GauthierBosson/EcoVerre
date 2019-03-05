@@ -28,33 +28,35 @@ class IncidentAdmin extends AbstractAdmin
         $formMapper->add('date', DateType::class, [
             'label' => 'Date'
         ]);
-        $formMapper->add('trashId', HiddenType::class, [
-            'data' => 'test'
+        $formMapper->add('trash', EntityType::class, [
+            'class' => Trashs::class,
+            'choice_label' => 'reference'
         ]);
         $formMapper->add('address', TextType::class, [
             'label' => 'Adresse'
         ]);
         $formMapper->add('email', HiddenType::class, [
-            'label' => 'Email'
+            'label' => 'Email',
+            'data' => 'test@test'
         ]);
-        $formMapper->add('reference', EntityType::class, [
-            'class' => Trashs::class,
-            'choice_label' => 'reference'
+        $formMapper->add('reference', HiddenType::class, [
+            'data' => 'bidon'
         ]);
         $formMapper->add('city', HiddenType::class, [
-            'label' => 'Ville'
+            'label' => 'Ville',
+            'data' => 'Toulouse'
         ]);
         $formMapper->add('latitude', HiddenType::class, [
             'label' => 'Latitude',
-            'data' => 'test'
+            'data' => 6789.6789
         ]);
         $formMapper->add('longitude', HiddenType::class, [
             'label' => 'Longitude',
-            'data' => 'test'
+            'data' => 67867.7897
         ]);
         $formMapper->add('altitude', HiddenType::class, [
             'label' => 'Altidue',
-            'data' => 'test'
+            'data' => 789.5678
         ]);
         $formMapper->add('description', TextareaType::class, [
             'label' => 'Description'
