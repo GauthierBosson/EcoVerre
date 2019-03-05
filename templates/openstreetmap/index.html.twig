@@ -17,6 +17,8 @@
 
 
         window.onload = function () {
+
+
             console.log('Page chargée ');
 
             var map = L.map('map').setView([43.6005, 1.3472], 11);
@@ -43,16 +45,36 @@
                         + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
                         + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
                     );
-                    return marker;
 
+                    return marker;
                 }
             }).addTo(map);
+
+            map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
+                .on('locationfound', function(e){
+                    var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+                        weight: 1,
+                        color: '#ff7800',
+                        fillColor: '#ff7800',
+                        fillOpacity: 0.2
+                    });
+                    map.addLayer(circle);
+                })
+                .on('locationerror', function(e){
+                    console.log(e);
+                    alert("Location access denied.");
+                });
+
         }
 
 
 
 
+
+
     </script>
+
+
 
 {% endblock %}
 
@@ -65,7 +87,11 @@
     Affichage de la carte :
 
 
-
+    latlng.bindPopup("Name: " + feature.properties.name);
+    document.getElementById("texte").innerHTML = feature.properties.name;
+    layer.on({
+    click: showData
+    });
 
 
     <div id="map" style="height: 400px"></div>
