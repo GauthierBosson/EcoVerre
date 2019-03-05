@@ -1,4 +1,10 @@
 {
+    "botman/driver-telegram": {
+        "version": "1.5.2"
+    },
+    "botman/driver-web": {
+        "version": "1.5.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
