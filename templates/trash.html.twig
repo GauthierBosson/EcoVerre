@@ -1,0 +1,72 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="recup.js"></script>
+    <script>
+        var maVariable = verre;
+
+
+        console.log(maVariable);
+        $.ajax({
+            url: "{{ path('trash') }}",
+            data: 'maVariable='+ maVariable,
+            success: function(reponse) {
+                console.log(data);
+                document.getElementsByClassName('trash')
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+    </script>
+
+{% endblock %}
+
+{% block title %}Hello OpenstreetmapController!{% endblock %}
+
+{% block body %}
+
+    {% if ajax  is defined %}
+        
+
+    {{ dump(ajax) }}
+
+    {% for result in ajax %}
+        {{ dump(result) }}
+    {% endfor %}
+    {% endif %}
+
+    <form action="/trash" method="post">
+        <input type="text" name="name">
+        <input type="submit">
+
+    </form>
+    <div class="trash">
+
+    </div>
+
+
+
+
+
+    {% block javascripts %}
+
+
+
+    {% endblock %}
+
+
+{% endblock %}
+
+
