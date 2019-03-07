@@ -17,45 +17,28 @@ class TrashController extends AbstractController
     /**
      *@Route("/trash",name="trash")
      */
-    public function index(\Symfony\Component\HttpFoundation\Request $request){
+    public function index(){
+
 
       /* if (isset($_GET['maVariable'])){
             $ajax = $_GET['maVariable'];
         var_dump($ajax);
         }*/
         if (isset($_POST['name'])) {
-            var_dump($_POST['name']);
+            $opts = array('http'=>array('header'=>"User-Agent: StevesCleverAddressScript 3.7.6\r\n"));
+            $context = stream_context_create($opts);
+            $address = '25 rue du bec';
+            $zip = '76000';
+            $url = 'https://nominatim.openstreetmap.org/search/25%20rue%20du%20bec%2076000?format=json&limit=1';
+            $gps= file_get_contents($url,false,$context);
+            $gps= json_decode($gps,true);
+            var_dump($gps[0]['lat']);
             $name = $_POST['name'];
-            $json ="{
-    \"datasetid\": \"$name\",
-    \"recordid\": \"543d89cfb0bc68031def878b65945a181f72d33b\",
-    \"fields\": {
-      \"commune\": \"TheoILLE\",
-      \"adresse\": \"CHEMIN LAURENT\",
-      \"code_com\": \"31022\",
-      \"geo_point_2d\": [
-        43.6629100020807,
-        1.424044004058203
-      ],
-      \"dmt_type\": \"Verre\",
-      \"geo_shape\": {
-        \"type\": \"Point\",
-        \"coordinates\": [
-          1.424044004058203,
-          43.6629100020807
-        ]
-      },
-      \"id\": \"AUCVE5010\"
-    },
-    \"geometry\": {
-      \"type\": \"Lol\",
-      \"coordinates\": [
-        1.424044004058203,
-        43.6629100020807
-      ]
-    },
-    \"record_timestamp\": \"2019-03-04T10:45:32+01:00\"
-  }";
+            $json ="{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[1.432351877926075,43.67490048623355]},
+            \"properties\":{\"commune\":\"AUCAMVILLE\",\"adresse\":\"RUE DES CHENES\",\"code_com\":\"31022\",\"geo_point_2d\":[43.67490048623355,1.432351877926075],
+            \"dmt_type\":\"Verre\",\"id\":\"AUCVE5002\"}}";
+
+
             $po = file_get_contents('recup.js');
             $po = substr($po , 12);
             var_dump($po);
