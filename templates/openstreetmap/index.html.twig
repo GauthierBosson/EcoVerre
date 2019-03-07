@@ -18,9 +18,6 @@
 
         window.onload = function () {
 
-
-            console.log('Page chargée ');
-
             // mise en place de la map
             var map = L.map('map').setView([43.6005, 1.3472], 11);
             var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -52,9 +49,9 @@
             }).addTo(map);
 
             // ajout de la géolocalisation
-            map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
-                .on('locationfound', function(e){
-                    var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+            map.locate({setMarker: true, watch: true}) /* This will return map so you can do chaining */
+                .on('locationfound', function (e) {
+                    var circle = L.circle([e.latitude, e.longitude], e.accuracy / 2, {
                         weight: 1,
                         color: '#ffb045',
                         fillColor: '#ff7800',
@@ -62,12 +59,20 @@
                     });
                     map.addLayer(circle);
                 })
-                .on('locationerror', function(e){
+                .on('locationerror', function (e) {
                     console.log(e);
                     alert("Location access denied.");
                 });
-
         }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -89,14 +94,9 @@
     Affichage de la carte :
 
 
-    marker.bindPopup("Name: " + feature.properties.name);
-    document.getElementById("texte").innerHTML = feature.properties.name;
-    layer.on({
-    click: showData
-    });
-
 
     <div id="map" style="height: 400px"></div>
+
 
 
     <div id="texte"> </div>
@@ -105,7 +105,11 @@
 
     {% block javascripts %}
 
+<script>
 
+
+
+</script>
 
     {% endblock %}
 
