@@ -11,6 +11,7 @@ namespace App\Admin;
 
 use App\Entity\Incidents;
 use App\Entity\Trashs;
+use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -34,6 +35,12 @@ class IncidentAdmin extends AbstractAdmin
         ]);
         $formMapper->add('trash', EntityType::class, [
             'class' => Trashs::class,
+            'query_builder' => function(EntityRepository $er) {
+                $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+                return $er->createQueryBuilder('trash')
+                    ->where('trash.city = :city')
+                    ->setParameter('city', $user->getCity());
+            },
             'choice_label' => 'reference'
         ]);
         $formMapper->add('email', HiddenType::class, [
