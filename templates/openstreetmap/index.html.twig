@@ -68,6 +68,7 @@
                 pointToLayer: function (feature, latlng) {
                     var marker = L.marker(latlng);
 
+                    // Detail du Popup
                     var popup = L.popup({
                         pane: 'fixed', // Указываем нужный pane
                         className: 'popup-fixed',
@@ -78,8 +79,6 @@
                         + '<b>Code commune : </b>' + feature.properties.code_com + '<br>');
 
                     marker.bindPopup(popup);
-
-
                     return marker;
                 }
             }).addTo(map);
