@@ -23,6 +23,12 @@ class TrashAdmin extends AbstractAdmin
     {
         $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
+        $inseeUrl = 'https://geo.api.gouv.fr/communes?nom=' . $user->getCity() . '&fields=departement';
+        $file = file_get_contents($inseeUrl);
+        $json = json_decode($file, true);
+        $code = $json[0]['code'];
+
+
         $formMapper->add('city', HiddenType::class, [
             'label' => 'Ville',
             'data' => $user->getCity()
@@ -30,12 +36,10 @@ class TrashAdmin extends AbstractAdmin
         $formMapper->add('address', TextType::class, [
             'label' => 'Adresse'
         ]);
-        $formMapper->add('inseeCode', TextType::class, [
-            'label' => 'Code Insee'
+        $formMapper->add('inseeCode', HiddenType::class, [
+            'label' => 'Code Insee',
+            'data' => $code
         ]);
-        /*$formMapper->add('altitude', TextType::class, [
-            'label' => 'Altitude'
-        ]);*/
         $formMapper->add('reference', TextType::class, [
             'label' => 'Référence'
         ]);
