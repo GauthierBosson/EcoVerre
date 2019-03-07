@@ -33,9 +33,9 @@ class TrashAdmin extends AbstractAdmin
         $formMapper->add('inseeCode', TextType::class, [
             'label' => 'Code Insee'
         ]);
-        $formMapper->add('altitude', TextType::class, [
+        /*$formMapper->add('altitude', TextType::class, [
             'label' => 'Altitude'
-        ]);
+        ]);*/
         $formMapper->add('reference', TextType::class, [
             'label' => 'Référence'
         ]);
@@ -98,8 +98,14 @@ class TrashAdmin extends AbstractAdmin
         $json = json_decode($file, true);
         $lat = $json[0]['lat'];
         $lon = $json[0]['lon'];
+        $token = '4TozhmTJ9jLsEVJRLrWHXF50V0xqSvy8OgXCfVJ6p0mZrEY6Ts6iU5Sear5w3gHq';
+        $urlElevation = 'https://api.jawg.io/elevations?locations=' . $lat . ',' . $lon . '&access-token=' . $token;
+        $fileElevation = file_get_contents($urlElevation, false, $context);
+        $jsonElevation = json_decode($fileElevation, true);
+        $elevation = $jsonElevation[0]['elevation'];
         $object->setLatitude($lat);
         $object->setLongitude($lon);
+        $object->setAltitude($elevation);
     }
 
 }
