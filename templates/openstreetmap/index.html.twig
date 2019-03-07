@@ -12,6 +12,27 @@
 
     <script src="{{ asset('json/recup-verre.geojson') }}"></script>
 
+    <style>
+
+        .popup-fixed {
+            position: fixed;
+            top: auto;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+            margin: 0;
+            border-radius: 0;
+        }
+        .popup-fixed .leaflet-popup-tip-container {
+            display: none;
+        }
+        .popup-fixed .leaflet-popup-content-wrapper {
+            border-radius: 0;
+        }
+
+    </style>
+
     <script>
 
 
@@ -26,9 +47,17 @@
                 accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
             }).addTo(map);
 
+            var pane = map.createPane('fixed', document.getElementById('map'));
+
+
             // L.marker([43.597743300081525, 1.484948325807597]).addTo(map);
             // for (var i=0; i < verre.length; i++){
             //     L.marker([verre[i].coordinates[0],verre[i].coordinates[1]]).addTo(map);
+
+
+
+
+
 
 
             // Ajout des markers sur la map par rapport au fichier geojson
@@ -38,11 +67,18 @@
                 },
                 pointToLayer: function (feature, latlng) {
                     var marker = L.marker(latlng);
-                    marker.bindPopup('<b><u>Description de la benne</u></b><br>'
+
+                    var popup = L.popup({
+                        pane: 'fixed', // Указываем нужный pane
+                        className: 'popup-fixed',
+                        autoPan: false,
+                    }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Commune:</b>' + feature.properties.commune + '<br>'
                         + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
-                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
-                    );
+                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>');
+
+                    marker.bindPopup(popup);
+
 
                     return marker;
                 }

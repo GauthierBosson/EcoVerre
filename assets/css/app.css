@@ -1,3 +1,21 @@
 body {
     background-color: lightgray;
 }
+
+
+.popup-fixed {
+    position: fixed;
+    top: auto;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    margin: 0;
+    border-radius: 0;
+}
+.popup-fixed .leaflet-popup-tip-container {
+    display: none;
+}
+.popup-fixed .leaflet-popup-content-wrapper {
+    border-radius: 0;
+}
