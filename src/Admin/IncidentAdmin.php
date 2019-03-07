@@ -25,7 +25,7 @@ class IncidentAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $ref = random_bytes(10);
+        $ref = random_bytes(8);
 
         $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
@@ -40,9 +40,13 @@ class IncidentAdmin extends AbstractAdmin
             'label' => 'Email',
             'data' => $user->getEmail()
         ]);
+        $formMapper->add('city', HiddenType::class, [
+            'label' => 'Ville',
+            'data' => $user->getCity()
+        ]);
         $formMapper->add('reference', HiddenType::class, [
             'label' => 'Référence',
-            'data' => bin2hex($ref)
+            'data' => substr($user->getCity(), 0, 3 ) . 'ver' . bin2hex($ref)
         ]);
         $formMapper->add('description', TextareaType::class, [
             'label' => 'Description'
@@ -59,9 +63,8 @@ class IncidentAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->add('reference', TextType::class, [
-            'label' => 'Référence'
-        ]);
+        $listMapper->addIdentifier('reference');
+        $listMapper->add('date');
     }
 
     public function toString($object)
@@ -69,5 +72,16 @@ class IncidentAdmin extends AbstractAdmin
         return $object instanceof Incidents
             ? $object->getReference()
             : 'Incidents';
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $query = parent::createQuery($context);
+        $query->andWhere(
+            $query->expr()->eq($query->getRootAliases()[0] . '.city', ':my_param')
+        );
+        $query->setParameter('my_param', $user->getCity());
+        return $query;
     }
 }
