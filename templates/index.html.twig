@@ -3,7 +3,7 @@
 {% block body %}
     <div class="row">
         <div class="col-6 offset-3 border px-2 py-2 mt-2">
-            <h1>Eagle Chat Bot</h1>
+            <h1>Le meilleur bot du monde</h1>
 
             <div id="app-messages" style="height: 600px; overflow-y: scroll;">
                 <div class="message" v-for="message in messages">
@@ -42,7 +42,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
     <script type="text/javascript">
         var messages = [
-            { from: 'Bot', text: 'Welcome, try asking me about enrolment, membership, insurance or upcoming activities.  Or just say hi!' }
+            { from: 'Jack Habot', text: 'Bienvenue sur le chat bot de Green World' }
         ];
         var app = new Vue({
             el: '#app-messages',
@@ -54,7 +54,6 @@
                 $("#app-messages").scrollTop($("#app-messages")[0].scrollHeight);
             }
         });
-
         var appForm = new Vue({
             el: '#app-form',
             methods: {
@@ -67,28 +66,23 @@
                         $('#message-send').removeAttr('disabled');
                     }
                 },
-
                 // Sends the message to the bot, and displays the response
                 send: function (event) {
                     event.preventDefault();
                     var message = $('#message-input').val();
-
                     //Add the sent message to the message list
-                    messages.push({ from: 'You', text: message });
-
+                    messages.push({ from: 'Anonyme', text: message });
                     // Clear the inputs
                     $('#message-input').val('');
                     $('#message-send').attr('disabled', 'disabled');
-
                     //Build up the form data
                     const data = new FormData();
                     data.append('driver', 'web');
                     data.append('message', message);
-
                     //Send the message
                     axios.post('/message', data).then(function(response) {
                         // Add the response to the messages array
-                        messages.push({ from: 'Bot', text: response.data.messages[0].text});
+                        messages.push({ from: 'Jack Habot', text: response.data.messages[0].text});
                     });
                 }
             }
