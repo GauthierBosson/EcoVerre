@@ -26,19 +26,19 @@ class WidgetController extends Controller {
         $botman = BotManFactory::create([]); //No config options required
 
 
-        $botman->hears('(hello|hi|hey)', function (BotMan $bot) use ($botService) {
+        $botman->hears('(Bonjour|bonjour|salut|Salut)', function (BotMan $bot) use ($botService) {
             $bot->reply($botService->handleHello());
         });
 
-        $botman->hears('(Ou|ou|Où|où) se trouve le rapport (d\'incidents|d\'incident) ?', function (BotMan $bot) use ($botService) {
+        $botman->hears('(Ou|ou|Où|où) se trouve le rapport (d\'incidents|d\'incident)', function (BotMan $bot) use ($botService) {
             $bot->reply($botService->handleIncident());
         });
 
-        $botman->hears('(Qui|qui) est le référend de ma ville ?', function (BotMan $bot) use ($botService) {
+        $botman->hears('(Qui|qui) est le référend de ma ville', function (BotMan $bot) use ($botService) {
            $bot->reply($botService->handleReferend());
         });
 
-        $botman->hears('(Qui|qui) prévenir en cas (d\'incident|d\'incidents) ?', function (BotMan $bot) use ($botService) {
+        $botman->hears('(Qui|qui) prévenir en cas (d\'incidents|d\'incidents) ', function (BotMan $bot) use ($botService) {
             $bot->reply($botService->handleReferend2());
         });
 
