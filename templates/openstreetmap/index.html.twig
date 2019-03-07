@@ -21,6 +21,7 @@
 
             console.log('Page chargée ');
 
+            // mise en place de la map
             var map = L.map('map').setView([43.6005, 1.3472], 11);
             var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 maxZoom: 18,
@@ -33,7 +34,7 @@
             //     L.marker([verre[i].coordinates[0],verre[i].coordinates[1]]).addTo(map);
 
 
-            // Add baseLayers to the map
+            // Ajout des markers sur la map par rapport au fichier geojson
             geojson = L.geoJson(Verre, {
                 style: function (feature) {
                     return feature.properties && feature.properties.style;
@@ -50,11 +51,12 @@
                 }
             }).addTo(map);
 
+            // ajout de la géolocalisation
             map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
                 .on('locationfound', function(e){
                     var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
                         weight: 1,
-                        color: '#ff7800',
+                        color: '#ffb045',
                         fillColor: '#ff7800',
                         fillOpacity: 0.2
                     });
@@ -87,7 +89,7 @@
     Affichage de la carte :
 
 
-    latlng.bindPopup("Name: " + feature.properties.name);
+    marker.bindPopup("Name: " + feature.properties.name);
     document.getElementById("texte").innerHTML = feature.properties.name;
     layer.on({
     click: showData
