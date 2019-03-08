@@ -24,17 +24,17 @@ class TrashController extends AbstractController
             $ajax = $_GET['maVariable'];
         var_dump($ajax);
         }*/
-        if (isset($_POST['name'])) {
+        if (isset($_POST['sender'])) {
             $opts = array('http'=>array('header'=>"User-Agent: StevesCleverAddressScript 3.7.6\r\n"));
             $context = stream_context_create($opts);
-            $address = '25 rue du bec'; // changer en resultat de formulaire
-            $zip = '76000'; // changer en resultat de formulaire
-            $url = 'https://nominatim.openstreetmap.org/search/25%20rue%20du%20bec%2076000?format=json&limit=1';
+            $address = rawurlencode($_POST['address']); // changer en resultat de formulaire
+            $zip = rawurlencode($_POST['zip']); // changer en resultat de formulaire
+            $url = "https://nominatim.openstreetmap.org/search/$address%20$zip?format=json&limit=1";
             $gps= file_get_contents($url,false,$context);
             $gps= json_decode($gps,true);
             $lat = $gps[0]['lat'];
             $lon = $gps[0]['lon'];
-            $communeName = 'Colomiers'; // changer en resultat de formulaire
+            $communeName = $_POST['commune']; // changer en resultat de formulaire
 
             $commune = 'https://geo.api.gouv.fr/communes?nom='.$communeName;
             $commune = file_get_contents($commune);
@@ -42,8 +42,8 @@ class TrashController extends AbstractController
             $code_com = $commune[0]['code'];
             $idTrash = substr($communeName, 0 ,3). 'VE' . rand(100,999);
             $idTrash = strtoupper($idTrash);
-            var_dump($idTrash);
-            $name = $_POST['name'];
+            $address = rawurldecode($address);
+
             $json ="{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[$lon,$lat},
             \"properties\":{\"commune\":\"$communeName\",\"adresse\":\"$address\",\"code_com\":\"$code_com\",\"geo_point_2d\":[$lat,$lon],
             \"dmt_type\":\"Verre\",\"id\":\"$idTrash\"}}";
