@@ -37,7 +37,7 @@ class OpenstreetmapController extends AbstractController
 
 
 
-        return $this->render('openstreetmap/index.html.twig', [
+        return $this->render('openstreetmap/openstreetmap.html.twig', [
             'controller_name' => 'OpenstreetmapController',
             'verre' => $fp
         ]);
@@ -45,6 +45,19 @@ class OpenstreetmapController extends AbstractController
 
 
     }
+
+
+    /**
+     * @Route("/index", name="index")
+     */
+    public function map()
+    {
+        return $this->render('openstreetmap/index.html.twig', [
+            'controller_name' => 'OpenstreetmapController',
+        ]);
+
+    }
+
 
 
 }

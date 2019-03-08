@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <!-- <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" href="{{ asset('node_modules/leaflet/dist/leaflet.css') }}"/>
+    <script src="{{ asset('node_modules/leaflet/dist/leaflet.js') }}"></script> -->
+
+
+    <!--  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" /> -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+
+    <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
+
+
+    <script src="{{ asset('json/recup-verre.geojson') }}"></script>
+
+    <style>
+        .popup-fixed {
+            position: fixed;
+            top: auto;
+            bottom: 0 ;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+            margin: 0;
+            border-radius: 0;
+        }
+
+
+    </style>
+
+
+
+    <script>
+        window.onload = function () {
+
+            // mise en place de la map
+            L.mapbox.accessToken = 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg';
+            var map = L.mapbox.map('map')
+                .setView([43.6005, 1.3472], 11)
+                .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
+                .addControl(L.mapbox.geocoderControl('mapbox.places', {
+                    autocomplete: true
+                }));
+
+            var pane = map.createPane('fixed', document.getElementById('map'));
+
+
+            // Ajout des markers sur la map par rapport au fichier geojson
+            geojson = L.geoJson(Verre, {
+                style: function (feature) {
+                    return feature.properties && feature.properties.style;
+                },
+                pointToLayer: function (feature, latlng) {
+                    var marker = L.marker(latlng);
+
+                    // Detail du Popup
+                    var popup = L.popup({
+                        pane: 'fixed',
+                        className: 'popup-fixed',
+                        autoPan: false,
+                    }).setContent('<b><u>Description de la benne</u></b><br>'
+                        + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
+                        + '<b>Commune:</b>' + feature.properties.commune + '<br>'
+                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>');
+
+                    marker.bindPopup(popup);
+                    return marker;
+                }
+            }).addTo(map);
+
+            // ajout de la géolocalisation
+            map.locate({setMarker: true, watch: true}) /* This will return map so you can do chaining */
+                .on('locationfound', function (e) {
+                    var circle = L.circle([e.latitude, e.longitude], e.accuracy / 2, {
+                        weight: 1,
+                        color: '#ffb045',
+                        fillColor: '#ff7800',
+                        fillOpacity: 0.2
+                    });
+                    map.addLayer(circle);
+                })
+                .on('locationerror', function (e) {
+                    console.log(e);
+                    alert("Location access denied.");
+                });
+
+
+        }
+    </script>
+
+
+{% endblock %}
+
+{% block title %}Hello OpenstreetmapController!{% endblock %}
+
+{% block body %}
+
+
+
+    <div id="map" style="height: 400px"></div>
+
+
+    {% block javascripts %}
+
+    {% endblock %}
+
+
+{% endblock %}
+
+
