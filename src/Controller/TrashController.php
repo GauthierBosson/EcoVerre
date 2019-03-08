@@ -32,10 +32,17 @@ class TrashController extends AbstractController
             $url = 'https://nominatim.openstreetmap.org/search/25%20rue%20du%20bec%2076000?format=json&limit=1';
             $gps= file_get_contents($url,false,$context);
             $gps= json_decode($gps,true);
-            var_dump($gps[0]['lat']);
+            $lat = $gps[0]['lat'];
+            $lon = $gps[0]['lon'];
+            $communeName = 'Colomiers';
+            $commune = 'https://geo.api.gouv.fr/communes?nom='.$communeName;
+            $commune = file_get_contents($commune);
+            $commune = json_decode($commune, true);
+            var_dump($commune[0]);
+            $code_com = $commune[0]['code'];
             $name = $_POST['name'];
-            $json ="{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[1.432351877926075,43.67490048623355]},
-            \"properties\":{\"commune\":\"AUCAMVILLE\",\"adresse\":\"RUE DES CHENES\",\"code_com\":\"31022\",\"geo_point_2d\":[43.67490048623355,1.432351877926075],
+            $json ="{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[$lon,$lat},
+            \"properties\":{\"commune\":\"AUCAMVILLE\",\"adresse\":\"RUE DES CHENES\",\"code_com\":\"31022\",\"geo_point_2d\":[$lat,$lon],
             \"dmt_type\":\"Verre\",\"id\":\"AUCVE5002\"}}";
 
 
