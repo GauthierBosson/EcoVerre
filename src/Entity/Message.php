@@ -17,12 +17,12 @@ class Message
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Users")
      */
     private $sender;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Users")
      */
     private $receiver;
 
@@ -52,28 +52,36 @@ class Message
         return $this->id;
     }
 
-    public function getSender(): ?int
+    /**
+     * @return mixed
+     */
+    public function getSender()
     {
         return $this->sender;
     }
 
-    public function setSender(int $sender): self
+    /**
+     * @param mixed $sender
+     */
+    public function setSender($sender): void
     {
         $this->sender = $sender;
-
-        return $this;
     }
 
-    public function getReceiver(): ?int
+    /**
+     * @return mixed
+     */
+    public function getReceiver()
     {
         return $this->receiver;
     }
 
-    public function setReceiver(int $receiver): self
+    /**
+     * @param mixed $receiver
+     */
+    public function setReceiver($receiver): void
     {
         $this->receiver = $receiver;
-
-        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
