@@ -11,12 +11,17 @@ services:
         class: App\Admin\TrashAdmin
         arguments: [~, App\Entity\Trashs, ~]
         tags:
-        - { name: sonata.admin, manager_type: orm, label: Trashs }
+        - { name: sonata.admin, manager_type: orm, label: Bennes }
     admin.incident:
         class: App\Admin\IncidentAdmin
         arguments: [~, App\Entity\Incidents, ~]
         tags:
         - { name: sonata.admin, manager_type: orm, label: Incidents }
+    admin.message:
+        class: App\Admin\MessageReferentAdmin
+        arguments: [~, App\Entity\Message, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, label: Messages }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
