@@ -14,6 +14,10 @@
     <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
 
+    <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' type='text/css' />
+
+
 
     <script src="{{ asset('json/recup-verre.geojson') }}"></script>
 
@@ -30,6 +34,42 @@
         }
 
 
+        #directions {
+            position: absolute;
+            width: 33.3333%;
+            max-width: 300px;
+            min-width: 200px;
+        }
+
+        #inputs {
+            z-index: 99;
+            top: 8px;
+            right: 21px;
+            /* left: 10px; */
+            position: absolute;
+        }
+
+        #directions {
+            z-index: 99;
+            background: rgba(0,0,0,.8);
+            top: 124px;            right: 0;
+            bottom: 0;
+            overflow: auto;
+            height: 284px;
+        }
+
+        #errors {
+            z-index: 8;
+            opacity: 0;
+            padding: 10px;
+            border-radius: 0 0 3px 3px;
+            background: rgba(0,0,0,.25);
+            top: 90px;
+            left: 10px;
+        }
+
+
+
     </style>
 
 
@@ -40,11 +80,33 @@
             // mise en place de la map
             L.mapbox.accessToken = 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg';
             var map = L.mapbox.map('map')
-                .setView([43.6005, 1.3472], 11)
-                .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
+                .setView([43.6206, 1.5484], 11)
                 .addControl(L.mapbox.geocoderControl('mapbox.places', {
                     autocomplete: true
-                }));
+                }))
+                .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+
+            // move the attribution control out of the way
+            map.attributionControl.setPosition('bottomleft');
+
+// create the initial directions object, from which the layer
+// and inputs will pull data.
+            var directions = L.mapbox.directions();
+
+            var directionsLayer = L.mapbox.directions.layer(directions)
+                .addTo(map);
+
+            var directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
+                .addTo(map);
+
+
+            var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
+                .addTo(map);
+
+            var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
+                .addTo(map);
+
 
             var pane = map.createPane('fixed', document.getElementById('map'));
 
@@ -101,8 +163,14 @@
 
 
 
-    <div id="map" style="height: 400px"></div>
-
+    <div id='map' style="height: 400px"></div>
+    <div id='inputs'></div>
+    <div id="calcul">
+    <div id='directions'>
+        <div id='routes'></div>
+        <div id='instructions'></div>
+    </div>
+    </div>
 
     {% block javascripts %}
 
