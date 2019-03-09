@@ -15,16 +15,25 @@ use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\DataTransformer\ModelToIdTransformer;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Form\SenderToUsersTransformer;
 
 class MessageReferentAdmin extends AbstractAdmin
 {
+    private $transformer;
+
+    public function __construct(string $code, string $class, string $baseControllerName, SenderToUsersTransformer $transformer)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->transformer = $transformer;
+    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -53,9 +62,11 @@ class MessageReferentAdmin extends AbstractAdmin
             'label' => 'Message',
             'attr' => ['rows' => 20]
         ]);
-        $formMapper->add('sender', HiddenType::class, [
+        $formMapper->add('sender', HiddenType::class,[
             'data' => $user->getId()
-        ]);
+        ])
+        ->get('sender')
+        ->addModelTransformer($this->transformer);
         $formMapper->add('status', HiddenType::class, [
             'data' => 0
         ]);
@@ -68,22 +79,27 @@ class MessageReferentAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        $datagridMapper->add('object');
         $datagridMapper->add('date');
-        $datagridMapper->add('email');
-        $datagridMapper->add('reference');
-        $datagridMapper->add('description');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('reference');
+        $listMapper->addIdentifier('object');
         $listMapper->add('date');
     }
 
     public function toString($object)
     {
         return $object instanceof Message
-            ? $object->getReference()
+            ? $object->getObject()
             : 'Message';
+    }
+
+    public function configureOptions(OptionsResolver $optionsResolver)
+    {
+        $optionsResolver->setDefaults([
+            'data_class'=>Users::class
+        ]);
     }
 }
