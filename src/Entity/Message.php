@@ -27,7 +27,7 @@ class Message
     private $receiver;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
