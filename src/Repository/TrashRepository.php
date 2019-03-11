@@ -43,6 +43,11 @@ class TrashRepository
         $idTrash = strtoupper($idTrash);
         return $idTrash;
     }
+    public function getCommuneCode(){
+        $commune = $this->getCommuneInfo();
+        $code_com = $commune[0]['code'];
+        return $code_com;
+    }
     public function generateTrashJson(){
         $gps = $this->getCoordinates();
         $lat = $gps[0]['lat'];
@@ -50,10 +55,24 @@ class TrashRepository
         $communeName = $_POST['commune']; // changer en resultat de formulaire
         $address = $_POST['address']; // changer en resultat de formulaire
         $idTrash = $this->generateIdTrash();
+        $code_com = $this->getCommuneCode();
 
 
         $json ='}},{"type":"Feature","geometry":{"type":"Point","coordinates":['.$lon.','.$lat.']},"properties":{"commune":"'.$communeName.'","adresse":"'.$address.'","code_com":'.$code_com.',"geo_point_2d":['.$lat.','.$lon.'],"dmt_type":"Verre","id":"'.$idTrash.'"}}]';
+        return $json;
+    }
+    public function addJsonObject(){
+        $json = $this->generateTrashJson();
+        $po = file_get_contents('recup.js');
 
+        $to = strpos($po,'}}');
+        $trans = array("}}]" => $json);
+        $lo = strtr($po,$trans);
+
+        $po = substr($lo , 12);
+        $envoi = 'var Verre = '. $po;
+        $file = fopen('recup.js','a');
+        file_put_contents('recup.js',$envoi);
     }
 
 }
