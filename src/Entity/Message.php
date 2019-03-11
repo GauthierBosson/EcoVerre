@@ -27,7 +27,7 @@ class Message
     private $receiver;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
@@ -42,7 +42,7 @@ class Message
     private $content;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      *
      */
     private $status;
