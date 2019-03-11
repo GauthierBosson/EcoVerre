@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  */
-class Users
+class Users implements UserInterface, TwoFactorInterface
 {
     /**
      * @ORM\Id()
@@ -44,7 +46,7 @@ class Users
     /**
      * @ORM\Column(type="array")
      */
-    private $role = [];
+    private $roles = [];
 
     /**
      * @ORM\Column(type="date")
@@ -52,24 +54,12 @@ class Users
     private $dateCreation;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
      */
-    private $lastLogin;
+    private $googleAuthenticatorSecret;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $secretCode;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isDoubleAuth;
 
     public function getId(): ?int
     {
@@ -136,14 +126,14 @@ class Users
         return $this;
     }
 
-    public function getRole(): ?array
+    public function getRoles(): ?array
     {
-        return $this->role;
+        return $this->roles;
     }
 
-    public function setRole(array $role): self
+    public function setRoles(array $roles): self
     {
-        $this->role[] = $role;
+        $this->roles[] = $roles;
 
         return $this;
     }
@@ -160,51 +150,51 @@ class Users
         return $this;
     }
 
-    public function getLastLogin(): ?\DateTimeInterface
+    public function isGoogleAuthenticatorEnabled(): bool
     {
-        return $this->lastLogin;
+        return $this->googleAuthenticatorSecret ? true : false;
     }
 
-    public function setLastLogin(?\DateTimeInterface $lastLogin): self
+    public function getGoogleAuthenticatorUsername(): string
     {
-        $this->lastLogin = $lastLogin;
-
-        return $this;
+        return $this->email;
     }
 
-    public function getActive(): ?bool
+    public function getGoogleAuthenticatorSecret(): string
     {
-        return $this->active;
+        return $this->googleAuthenticatorSecret;
     }
 
-    public function setActive(bool $active): self
+    public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
     {
-        $this->active = $active;
-
-        return $this;
+        $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
 
-    public function getSecretCode(): ?string
+    public function getSalt()
     {
-        return $this->secretCode;
+        return null;
     }
 
-    public function setSecretCode(?string $secretCode): self
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
     {
-        $this->secretCode = $secretCode;
-
-        return $this;
+        return $this->getEmail();
     }
 
-    public function getIsDoubleAuth(): ?bool
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
     {
-        return $this->isDoubleAuth;
+        return null;
     }
 
-    public function setIsDoubleAuth(bool $isDoubleAuth): self
-    {
-        $this->isDoubleAuth = $isDoubleAuth;
 
-        return $this;
-    }
 }
