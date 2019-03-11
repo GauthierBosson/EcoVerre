@@ -4,8 +4,8 @@ sonata_admin:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
     templates:
-        dashboard: 'dashboard_custom.html.twig'
-        user_block: 'user_block_custom.html.twig'
+        dashboard: 'admin/dashboard_custom.html.twig'
+        user_block: 'admin/user_block_custom.html.twig'
 sonata_block:
     blocks:
         sonata.admin.block.admin_list:
