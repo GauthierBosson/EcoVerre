@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 
-    <script src="{{ asset('json/recup-verre.geojson') }}"></script>
+    <script src="{{ asset('json/recup.js') }}"></script>
 
     <script>
 
@@ -38,6 +38,7 @@
                 },
                 pointToLayer: function (feature, latlng) {
                     var marker = L.marker(latlng);
+                    console
                     marker.bindPopup('<b><u>Description de la benne</u></b><br>'
                         + '<b>Commune:</b>' + feature.properties.commune + '<br>'
                         + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'

@@ -44,19 +44,30 @@ class TrashController extends AbstractController
             $idTrash = strtoupper($idTrash);
             $address = rawurldecode($address);
 
-            $json ="{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[$lon,$lat},
-            \"properties\":{\"commune\":\"$communeName\",\"adresse\":\"$address\",\"code_com\":\"$code_com\",\"geo_point_2d\":[$lat,$lon],
-            \"dmt_type\":\"Verre\",\"id\":\"$idTrash\"}}";
+
+            $json ='}},{"type":"Feature","geometry":{"type":"Point","coordinates":['.$lon.','.$lat.']},"properties":{"commune":"'.$communeName.'","adresse":"'.$address.'","code_com":'.$code_com.',"geo_point_2d":['.$lat.','.$lon.'],"dmt_type":"Verre","id":"'.$idTrash.'"}}]';
 
 
             $po = file_get_contents('recup.js');
-            $po = substr($po , 12);
-            $po = json_decode($po , true);
-            $pa =  array_push($po[0]['features'],$json);
-            $pa = json_encode($po);
-            $envoi = 'var Verre = '. $pa;
+
+            $to = strpos($po,'}}');
+            $trans = array("}}]" => $json);
+            $lo = strtr($po,$trans);
+           // $lo = json_encode($lo);
+
+            $po = substr($lo , 12);
+            //$po = json_encode(array_merge(json_decode($po,true),json_decode($json,true)));
+
+
+          //  $pa =  array_push($po[0]['features'],$json);
+        //    $pa = json_encode($po, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES| JSON_NUMERIC_CHECK);
+
+           // var_dump($pa);
+
+            $envoi = 'var Verre = '. $po;
+           // $envoi = json_encode(json_decode($envoi));
             $file = fopen('recup.js','a');
-          //  fwrite($file,$envoi);
+          //  fwrite($file,);
             file_put_contents('recup.js',$envoi);
 
 
