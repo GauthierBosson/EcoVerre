@@ -35,4 +35,12 @@ class TrashRepository
         $commune = json_decode($commune, true);
     }
 
+    public function generateIdTrash(){
+        $communeName = $_POST['commune']; // changer en resultat de formulaire
+
+        $idTrash = substr($communeName, 0 ,3). 'VE' . rand(100,999);
+        $idTrash = strtoupper($idTrash);
+        return $idTrash;
+    }
+
 }
