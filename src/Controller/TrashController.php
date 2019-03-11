@@ -21,9 +21,11 @@ class TrashController extends AbstractController
      */
     public function index(TrashRepository $trash, \Symfony\Component\HttpFoundation\Request $request){
 
+
         if ($request->isMethod('POST')) {
             $trash->addJsonObject();
         }
+
         return $this->render('trash.html.twig',[]);
 
     }

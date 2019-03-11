@@ -21,7 +21,7 @@ class TrashRepository
         $context = $this->customHeader();
         $address = rawurlencode($_POST['address']); // changer en resultat de formulaire
         $zip = rawurlencode($_POST['zip']); // changer en resultat de formulaire
-        $url = "https://nominatim.openstreetmap.org/search/$address%20$zip?format=json&limit=1";
+        $url = "https://nominatim.openstreetmap.org/search/$address,%20$zip?format=json&limit=1";
         $gps= file_get_contents($url,false,$context);
         $gps= json_decode($gps,true);
         return $gps;
@@ -73,6 +73,31 @@ class TrashRepository
         $envoi = 'var Verre = '. $po;
         $file = fopen('recup.js','a');
         file_put_contents('recup.js',$envoi);
+    }
+    public function addElevationJson(){
+        if (isset($_POST['reset'])){
+            $file = file_get_contents('recup.js');
+
+            $file = substr($file , 12);
+
+            $file= json_decode($file,true);
+            $alt = 'elvation: 3';
+            for ($i= 0 ; $i < count($file[0]['features']);$i++){
+                set_time_limit(1600);
+                $gps = $file[0]['features'][$i]['geometry']['coordinates'][1].','. $file[0]['features'][$i]['geometry']['coordinates'][0];
+                $gps = "https://api.jawg.io/elevations?locations=$gps&access-token=x8GoSSkA047qElaEnCgbEar6kYS5MgFtKdIOu9af2U5VRtmj0lddYe99DnVxczrj";
+                $gps = file_get_contents($gps);
+                $gps = json_decode($gps,true);
+                $gps= $gps[0]['elevation'];
+
+
+                array_push($file[0]['features'][$i]['geometry']['coordinates'],$gps);
+
+            }
+            $file =json_encode($file);
+            $file = 'var Verre = '.$file;
+            file_put_contents('json/recup.js',$file);
+        }
     }
 
 }
