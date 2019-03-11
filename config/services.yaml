@@ -36,3 +36,8 @@ services:
         arguments: [~,App\Entity\Message,~]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Message, label: Message}
+    admin.trash:
+        class: App\Admin\AdminTrashsAdmin
+        arguments: [~,App\Entity\Trashs,~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Bennes, label: Bennes}
