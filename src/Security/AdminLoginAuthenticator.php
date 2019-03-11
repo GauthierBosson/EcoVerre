@@ -101,6 +101,6 @@ final class AdminLoginAuthenticator extends AbstractFormLoginAuthenticator imple
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
-        return new RedirectResponse($this->router->generate('sonata_admin_dashboard'));
+        return new RedirectResponse($this->router->generate('check_2fa'));
     }
 }

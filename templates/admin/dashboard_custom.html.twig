@@ -1,12 +1,12 @@
 
-{% extends base_template %}
+{% extends app.session.get('check') == 1 ? base_template : 'admin/uncheck.html.twig' %}
 
 
     {% block title %}{{ 'title_dashboard'|trans({}, 'SonataAdminBundle') }}{% endblock%}
     {% block breadcrumb %}{% endblock %}
     {% block content %}
 
-
+        {% if app.session.get('check') == 1 %}
 
             {% set has_left = false %}
             {% for block in blocks.left %}
@@ -119,7 +119,7 @@
             {% endif %}
 
             {{ sonata_block_render_event('sonata.admin.dashboard.bottom', { 'admin_pool': sonata_admin.adminPool }) }}
-
+        {% endif %}
 
     {% endblock %}
 
