@@ -33,6 +33,7 @@ class TrashRepository
         $commune = 'https://geo.api.gouv.fr/communes?nom='.$communeName;
         $commune = file_get_contents($commune);
         $commune = json_decode($commune, true);
+        return $commune;
     }
 
     public function generateIdTrash(){
@@ -41,6 +42,18 @@ class TrashRepository
         $idTrash = substr($communeName, 0 ,3). 'VE' . rand(100,999);
         $idTrash = strtoupper($idTrash);
         return $idTrash;
+    }
+    public function generateTrashJson(){
+        $gps = $this->getCoordinates();
+        $lat = $gps[0]['lat'];
+        $lon = $gps[0]['lon'];
+        $communeName = $_POST['commune']; // changer en resultat de formulaire
+        $address = $_POST['address']; // changer en resultat de formulaire
+        $idTrash = $this->generateIdTrash();
+
+
+        $json ='}},{"type":"Feature","geometry":{"type":"Point","coordinates":['.$lon.','.$lat.']},"properties":{"commune":"'.$communeName.'","adresse":"'.$address.'","code_com":'.$code_com.',"geo_point_2d":['.$lat.','.$lon.'],"dmt_type":"Verre","id":"'.$idTrash.'"}}]';
+
     }
 
 }
