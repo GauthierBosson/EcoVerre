@@ -70,6 +70,17 @@ class MessageReferentAdmin extends AbstractAdmin
 
     }
 
+    public function createQuery($context = 'list')
+    {
+        $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $query = parent::createQuery($context);
+        $query->andWhere(
+            $query->expr()->eq($query->getRootAliases()[0] . '.receiver', ':my_param')
+        );
+        $query->setParameter('my_param', $user->getId());
+        return $query;
+    }
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('object');
@@ -87,8 +98,8 @@ class MessageReferentAdmin extends AbstractAdmin
         $showMapper
             ->tab('General') // the tab call is optional
             ->with('Message', [
-                'class'       => 'col-md-8',
-                'box_class'   => 'box box-solid box-success',
+                'class'       => 'col-md-12',
+                'box_class'   => 'box box-solid box-primary',
                 'description' => 'Votre message',
             ])
             ->add('object')
@@ -102,6 +113,7 @@ class MessageReferentAdmin extends AbstractAdmin
     {
         // to remove a single route
         $collection->remove('edit');
+        $collection->remove('create');
     }
 
     protected function configureBatchActions($actions)
