@@ -60,10 +60,10 @@ final class UsersAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name');
-        $listMapper->addIdentifier('firstname');
-        $listMapper->addIdentifier('email');
-        $listMapper->addIdentifier('city');
+        $listMapper->addIdentifier('name',null,['label'=>'Nom']);
+        $listMapper->add('firstname',null,['label'=>'Prénom']);
+        $listMapper->add('email');
+        $listMapper->add('city',null,['label'=>'Ville']);
     }
 
 
