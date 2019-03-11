@@ -24,6 +24,15 @@ class TrashRepository
         $url = "https://nominatim.openstreetmap.org/search/$address%20$zip?format=json&limit=1";
         $gps= file_get_contents($url,false,$context);
         $gps= json_decode($gps,true);
+        return $gps;
+    }
+
+    public function getCommuneInfo(){
+        $communeName = $_POST['commune']; // changer en resultat de formulaire
+
+        $commune = 'https://geo.api.gouv.fr/communes?nom='.$communeName;
+        $commune = file_get_contents($commune);
+        $commune = json_decode($commune, true);
     }
 
 }
