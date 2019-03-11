@@ -4,7 +4,9 @@
 namespace App\Admin;
 
 
-class MessageAdmin
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+
+class MessageAdmin extends AbstractAdmin
 {
 
 }

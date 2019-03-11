@@ -4,7 +4,9 @@
 namespace App\Admin;
 
 
-class UsersAdmin
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+
+class UsersAdmin extends AbstractAdmin
 {
 
 }

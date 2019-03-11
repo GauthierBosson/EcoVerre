@@ -31,8 +31,8 @@ services:
         arguments: [~,App\Entity\Users,~]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Utilisateurs ,label: Utilisateurs}
-        admin.message:
-            class: App\Admin\MessageAdmin
-            arguments: [~,App\Entity\Message,~]
-            tags:
-                - {name: sonata.admin, manager_type: orm, group: Message, label: Message}
+    admin.message:
+        class: App\Admin\MessageAdmin
+        arguments: [~,App\Entity\Message,~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Message, label: Message}
