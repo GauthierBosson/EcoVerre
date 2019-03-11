@@ -4,3 +4,8 @@ scheb_two_factor:
         - Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
         # If you're using guard-based authentication, you have to use this one:
         # - Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken
+    google:
+        enabled: true
+        server_name: Server Name       # Server name used in QR code
+        issuer: Green World            # Issuer name used in QR code
+        template: security/2fa.html.twig
