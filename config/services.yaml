@@ -26,3 +26,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    admin.users:
+        class: App\Admin\UsersAdmin
+        arguments: [~,App\Entity\Users,~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Utilisateurs ,label: Utilisateurs}
+        admin.message:
+            class: App\Admin\MessageAdmin
+            arguments: [~,App\Entity\Message,~]
+            tags:
+                - {name: sonata.admin, manager_type: orm, group: Message, label: Message}
