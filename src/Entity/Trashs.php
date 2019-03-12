@@ -61,6 +61,48 @@ class Trashs
      */
     private $actualCapacity;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $availability;
+
+    /**
+     * @ORM\Column(type="boolean",nullable=true)
+     */
+    private $damage;
+
+    /**
+     * @return mixed
+     */
+    public function getAvailability()
+    {
+        return $this->availability;
+    }
+
+    /**
+     * @param mixed $availability
+     */
+    public function setAvailability($availability): void
+    {
+        $this->availability = $availability;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDamage()
+    {
+        return $this->damage;
+    }
+
+    /**
+     * @param mixed $damage
+     */
+    public function setDamage($damage): void
+    {
+        $this->damage = $damage;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
