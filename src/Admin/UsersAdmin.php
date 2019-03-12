@@ -52,10 +52,10 @@ final class UsersAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
-        $datagridMapper->add('firstname');
+        $datagridMapper->add('name',null,['label'=>'Nom']);
+        $datagridMapper->add('firstname',null,['label'=>'Prénom']);
         $datagridMapper->add('email');
-        $datagridMapper->add('city');
+        $datagridMapper->add('city',null,['label'=>'Ville']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
