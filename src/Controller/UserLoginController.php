@@ -63,7 +63,21 @@ final class UserLoginController extends Controller
      */
     public function googleSecret(GoogleAuthenticatorInterface $googleAuthenticator)
     {
-        return new Response($googleAuthenticator->generateSecret());
+        $user = $this->getUser();
+        $userAuthState = $user->isGoogleAuthenticatorEnabled();
+        dump($userAuthState);
+        $em = $this->getDoctrine()->getManager();
+
+        if ($userAuthState === true) {
+            return new Response('Doublue authentification déjà activée');
+        } else {
+            $secret = $googleAuthenticator->generateSecret();
+            $user->setGoogleAuthenticatorSecret($secret);
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user_qrcode');
+        }
     }
 
     /**
@@ -77,6 +91,20 @@ final class UserLoginController extends Controller
         echo '<img src="'.$url.'" />';
 
         return new Response();
+    }
+
+    /**
+     * @Route("user/disabletfa", name="user_disable_tfa")
+     */
+    public function disableGoogleAuth()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $user->setGoogleAuthenticatorSecret(null);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('sonata_admin_dashboard');
     }
 
     /**

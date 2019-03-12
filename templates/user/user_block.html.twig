@@ -1,0 +1,20 @@
+{% block user_block %}
+    <li>
+        <a href="{{ path('user_logout') }}">
+            <i class="fa fa-power-off" ></i>Déconnexion
+        </a>
+    </li>
+    {% if not app.user.isGoogleAuthenticatorEnabled %}
+    <li>
+        <a href="{{ path('generate_user_google_secret') }}">
+            <i class="fa fa-shield" ></i>Activer la double authentification
+        </a>
+    </li>
+    {% else %}
+    <li>
+        <a href="{{ path('user_disable_tfa') }}">
+            <i class="fa fa-shield" ></i>Désactiver la double authentification
+        </a>
+    </li>
+    {% endif %}
+{% endblock %}
