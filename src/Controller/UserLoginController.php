@@ -69,7 +69,7 @@ final class UserLoginController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if ($userAuthState === true) {
-            return new Response('Doublue authentification déjà activée');
+            return new Response('Double authentification déjà activée');
         } else {
             $secret = $googleAuthenticator->generateSecret();
             $user->setGoogleAuthenticatorSecret($secret);
