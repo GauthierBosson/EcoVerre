@@ -35,7 +35,7 @@ services:
         class: App\Admin\MessageAdmin
         arguments: [~,App\Entity\Message,~]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: Message, label: Messages reçus}
+            - {name: sonata.admin, manager_type: orm, group: Messages, label: Messages reçus}
     admin.trash:
         class: App\Admin\AdminTrashsAdmin
         arguments: [~,App\Entity\Trashs,~]
@@ -50,4 +50,4 @@ services:
         class: App\Admin\SendMessageAdmin
         arguments: [~,App\Entity\Message,~]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: Message, label: Messages envoyés}
+            - {name: sonata.admin, manager_type: orm, group: Messages, label: Messages envoyés}
