@@ -9,6 +9,8 @@ use Symfony\Component\Config\FileLocator;
 
 class OpenstreetmapController extends AbstractController
 {
+    //carte pour utilisateur
+
     /**
      * @Route("/openstreetmap", name="openstreetmap")
      */
@@ -59,6 +61,7 @@ class OpenstreetmapController extends AbstractController
     }
 
 
+    //carte referent et admin
 
     /**
      * @Route("/carte", name="carte")
