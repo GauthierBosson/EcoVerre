@@ -81,7 +81,6 @@ class TrashRepository
             $file = substr($file , 12);
 
             $file= json_decode($file,true);
-            $alt = 'elvation: 3';
             for ($i= 0 ; $i < count($file[0]['features']);$i++){
                 set_time_limit(1600);
                 $gps = $file[0]['features'][$i]['geometry']['coordinates'][1].','. $file[0]['features'][$i]['geometry']['coordinates'][0];

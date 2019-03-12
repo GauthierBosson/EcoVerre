@@ -10,8 +10,8 @@ namespace App\Controller;
 
 
 use App\Repository\TrashRepository;
-use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TrashController extends AbstractController
@@ -19,7 +19,7 @@ class TrashController extends AbstractController
     /**
      *@Route("/trash",name="trash")
      */
-    public function index(TrashRepository $trash, \Symfony\Component\HttpFoundation\Request $request){
+    public function index(TrashRepository $trash, Request $request){
 
 
         if ($request->isMethod('POST')) {
