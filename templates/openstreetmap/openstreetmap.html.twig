@@ -19,6 +19,7 @@
           href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css'
           type='text/css'/>
 
+    <script src="https://cdn.jsdelivr.net/npm/graphhopper-js-api-client/dist/graphhopper-client.js"></script>
 
 
     <script src="{{ asset('json/recup.js') }}"></script>
@@ -134,7 +135,11 @@
                     }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
                         + '<b>Commune:</b>' + feature.properties.commune + '<br>'
-                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>');
+                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
+                        + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + feature.properties.adresse + ',+31280+'
+                        + feature.properties.commune + '/@' + feature.geometry.coordinates[1] + ',' + feature.geometry.coordinates[0] + '">');
+
+
 
                     marker.bindPopup(popup);
                     return marker;

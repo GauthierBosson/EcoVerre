@@ -74,4 +74,18 @@ class OpenstreetmapController extends AbstractController
 
     }
 
+
+
+    // test graphhopper
+    /**
+     * @Route("/graph", name="graph")
+     */
+    public function graph()
+    {
+        return $this->render('openstreetmap/essaie.html.twig', [
+            'controller_name' => 'OpenstreetmapController',
+        ]);
+
+    }
+
 }

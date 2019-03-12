@@ -12,11 +12,14 @@
 
 
     <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet'/>
 
     <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
-    <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' type='text/css' />
+    <link rel='stylesheet'
+          href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css'
+          type='text/css'/>
 
+    <script src="https://cdn.jsdelivr.net/npm/graphhopper-js-api-client/dist/graphhopper-client.js"></script>
 
 
     <script src="{{ asset('json/recup.js') }}"></script>
@@ -25,7 +28,7 @@
         .popup-fixed {
             position: fixed;
             top: auto;
-            bottom: 0 ;
+            bottom: 0;
             left: 0 !important;
             right: 0 !important;
             transform: none !important;
@@ -34,6 +37,40 @@
         }
 
 
+        #directions {
+            position: absolute;
+            width: 33.3333%;
+            max-width: 300px;
+            min-width: 200px;
+        }
+
+        #inputs {
+            z-index: 99;
+            top: 8px;
+            right: 21px;
+            /* left: 10px; */
+            position: absolute;
+        }
+
+        #directions {
+            z-index: 99;
+            background: rgba(0, 0, 0, .8);
+            top: 124px;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+            height: 284px;
+        }
+
+        #errors {
+            z-index: 8;
+            opacity: 0;
+            padding: 10px;
+            border-radius: 0 0 3px 3px;
+            background: rgba(0, 0, 0, .25);
+            top: 90px;
+            left: 10px;
+        }
 
 
     </style>
@@ -46,14 +83,41 @@
             // mise en place de la map
             L.mapbox.accessToken = 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg';
             var map = L.mapbox.map('map')
-                .setView([43.6005, 1.3472], 11)
+                .setView([43.6206, 1.5484], 11)
                 .addControl(L.mapbox.geocoderControl('mapbox.places', {
                     autocomplete: true
                 }))
                 .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 
+
+            var ghRouting = new GraphHopper.Routing({key: "ab4d2608-cb3a-4be0-a508-5293641bfbeb",
+                host: "https://graphhopper.com/api/1/", vehicle: "car", elevation: false});
+            ghRouting.addPoint(new GHInput(43.6206, 1.5484));
+            ghRouting.addPoint(new GHInput(19.04469, 72.9248));
+
+            ghRouting.doRequest()
+                .then(function (json) {
+                    var path = json.paths[0];
+                    routingLayer.addData({
+                        "type": "Feature",
+                        "geometry": path.points
+                    });
+
+                })
+                .catch(function (err) {
+                    var str = "An error occured: " + err.message;
+                    $("#routing-response").text(str);
+                });
+
+
             var pane = map.createPane('fixed', document.getElementById('map'));
+
+            // ajout de l'image : logo sur le marker
+            //  var icon = L.icon({
+            //    iconUrl: 'img/verre.png',
+            //   iconSize: [45, 40], // size of the icon
+            // });
 
 
             // Ajout des markers sur la map par rapport au fichier geojson
@@ -63,7 +127,6 @@
                 },
                 pointToLayer: function (feature, latlng) {
                     var marker = L.marker(latlng);
-
                     // Detail du Popup
                     var popup = L.popup({
                         pane: 'fixed',
@@ -72,12 +135,7 @@
                     }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
                         + '<b>Commune:</b>' + feature.properties.commune + '<br>'
-                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
-                        + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + feature.properties.adresse + ',+31280+'
-                        + feature.properties.commune + '/@' + feature.geometry.coordinates[1] + ',' + feature.geometry.coordinates[0] + '">');
-
-
-
+                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>');
 
                     marker.bindPopup(popup);
                     return marker;
@@ -119,12 +177,10 @@
         </div>
     </div>
 
-
     {% block javascripts %}
 
     {% endblock %}
 
 
 {% endblock %}
-
 
