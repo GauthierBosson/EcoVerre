@@ -12,20 +12,22 @@
 
 
     <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet'/>
 
     <script src='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js'></script>
-    <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' type='text/css' />
+    <link rel='stylesheet'
+          href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css'
+          type='text/css'/>
 
 
 
-    <script src="{{ asset('json/recup-verre.geojson') }}"></script>
+    <script src="{{ asset('recup.js') }}"></script>
 
     <style>
         .popup-fixed {
             position: fixed;
             top: auto;
-            bottom: 0 ;
+            bottom: 0;
             left: 0 !important;
             right: 0 !important;
             transform: none !important;
@@ -51,8 +53,9 @@
 
         #directions {
             z-index: 99;
-            background: rgba(0,0,0,.8);
-            top: 124px;            right: 0;
+            background: rgba(0, 0, 0, .8);
+            top: 124px;
+            right: 0;
             bottom: 0;
             overflow: auto;
             height: 284px;
@@ -63,11 +66,10 @@
             opacity: 0;
             padding: 10px;
             border-radius: 0 0 3px 3px;
-            background: rgba(0,0,0,.25);
+            background: rgba(0, 0, 0, .25);
             top: 90px;
             left: 10px;
         }
-
 
 
     </style>
@@ -90,8 +92,8 @@
             // move the attribution control out of the way
             map.attributionControl.setPosition('bottomright');
 
-// create the initial directions object, from which the layer
-// and inputs will pull data.
+            // create the initial directions object, from which the layer
+            // and inputs will pull data.
             var directions = L.mapbox.directions();
 
             var directionsLayer = L.mapbox.directions.layer(directions)
@@ -110,6 +112,12 @@
 
             var pane = map.createPane('fixed', document.getElementById('map'));
 
+            // ajout de l'image : logo sur le marker
+            //  var icon = L.icon({
+            //    iconUrl: 'img/verre.png',
+            //   iconSize: [45, 40], // size of the icon
+            // });
+
 
             // Ajout des markers sur la map par rapport au fichier geojson
             geojson = L.geoJson(Verre, {
@@ -118,7 +126,6 @@
                 },
                 pointToLayer: function (feature, latlng) {
                     var marker = L.marker(latlng);
-
                     // Detail du Popup
                     var popup = L.popup({
                         pane: 'fixed',
@@ -170,10 +177,10 @@
     </div>
     <div id='inputs'></div>
     <div id="calcul">
-    <div id='directions'>
-        <div id='routes'></div>
-        <div id='instructions'></div>
-    </div>
+        <div id='directions'>
+            <div id='routes'></div>
+            <div id='instructions'></div>
+        </div>
     </div>
 
     {% block javascripts %}

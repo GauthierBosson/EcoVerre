@@ -60,4 +60,15 @@ class OpenstreetmapController extends AbstractController
 
 
 
+    /**
+     * @Route("/carte", name="carte")
+     */
+    public function carteRef()
+    {
+        return $this->render('openstreetmap/carte.html.twig', [
+            'controller_name' => 'OpenstreetmapController',
+        ]);
+
+    }
+
 }
