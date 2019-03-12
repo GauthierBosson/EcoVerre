@@ -9,6 +9,8 @@ use Symfony\Component\Config\FileLocator;
 
 class OpenstreetmapController extends AbstractController
 {
+
+
     //carte pour utilisateur
 
     /**
