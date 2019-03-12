@@ -83,18 +83,21 @@ class TrashRepository
             $file= json_decode($file,true);
             for ($i= 0 ; $i < count($file[0]['features']);$i++){
                 set_time_limit(1600);
-                $gps = $file[0]['features'][$i]['geometry']['coordinates'][1].','. $file[0]['features'][$i]['geometry']['coordinates'][0];
-                $gps = "https://api.jawg.io/elevations?locations=$gps&access-token=x8GoSSkA047qElaEnCgbEar6kYS5MgFtKdIOu9af2U5VRtmj0lddYe99DnVxczrj";
-                $gps = file_get_contents($gps);
-                $gps = json_decode($gps,true);
-                $gps= $gps[0]['elevation'];
+                //$gps = $file[0]['features'][$i]['geometry']['coordinates'][1].','. $file[0]['features'][$i]['geometry']['coordinates'][0];
+              //  $gps = "https://api.jawg.io/elevations?locations=$gps&access-token=x8GoSSkA047qElaEnCgbEar6kYS5MgFtKdIOu9af2U5VRtmj0lddYe99DnVxczrj";
+                //$gps = file_get_contents($gps);
+                //$gps = json_decode($gps,true);
+                //$gps= $gps[0]['elevation'];
+                $file[0]['features'][$i]['properties']['maxCapacity'] = 2000;
+                $file[0]['features'][$i]['properties']['actualCapacity'] = rand(0,2000);
 
 
-                array_push($file[0]['features'][$i]['geometry']['coordinates'],$gps);
+                //array_push($file[0]['features'][$i]['geometry']['coordinates'],$gps);
 
             }
             $file =json_encode($file);
             $file = 'var Verre = '.$file;
+            print_r($file);
             file_put_contents('json/recup.js',$file);
         }
     }

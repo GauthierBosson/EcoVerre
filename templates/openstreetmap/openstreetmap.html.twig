@@ -19,7 +19,7 @@
 
 
 
-    <script src="{{ asset('json/recup-verre.geojson') }}"></script>
+    <script src="{{ asset('json/recup.js') }}"></script>
 
     <style>
         .popup-fixed {
@@ -120,6 +120,7 @@
                     var marker = L.marker(latlng);
 
                     // Detail du Popup
+                    if (feature.properties.actualCapacity > 1500){
                     var popup = L.popup({
                         pane: 'fixed',
                         className: 'popup-fixed',
@@ -127,8 +128,22 @@
                     }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
                         + '<b>Commune:</b>' + feature.properties.commune + '<br>'
-                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>');
+                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
+                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>'
+                    );
 
+                    }else{
+                        var popup = L.popup({
+                            pane: 'fixed',
+                            className: 'popup-fixed',
+                            autoPan: false,
+                        }).setContent('<b><u>Description de la benne</u></b><br>'
+                            + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
+                            + '<b>Commune:</b>' + feature.properties.commune + '<br>'
+                            + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
+                            + '<b>Capacité : La poubelle</b>' + '<br>'
+                        );
+                    }
                     marker.bindPopup(popup);
                     return marker;
                 }
