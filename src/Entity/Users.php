@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  */
-class Users implements UserInterface
+class Users implements UserInterface, TwoFactorInterface
 {
     /**
      * @ORM\Id()
@@ -53,24 +54,9 @@ class Users implements UserInterface
     private $dateCreation;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
      */
-    private $lastLogin;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $secretCode;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isDoubleAuth;
+    private $googleAuthenticatorSecret;
 
     public function getId(): ?int
     {
@@ -161,52 +147,24 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function getLastLogin(): ?\DateTimeInterface
+    public function isGoogleAuthenticatorEnabled(): bool
     {
-        return $this->lastLogin;
+        return $this->googleAuthenticatorSecret ? true : false;
     }
 
-    public function setLastLogin(?\DateTimeInterface $lastLogin): self
+    public function getGoogleAuthenticatorUsername(): string
     {
-        $this->lastLogin = $lastLogin;
-
-        return $this;
+        return $this->email;
     }
 
-    public function getActive(): ?bool
+    public function getGoogleAuthenticatorSecret(): string
     {
-        return $this->active;
+        return $this->googleAuthenticatorSecret;
     }
 
-    public function setActive(bool $active): self
+    public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
     {
-        $this->active = $active;
-
-        return $this;
-    }
-
-    public function getSecretCode(): ?string
-    {
-        return $this->secretCode;
-    }
-
-    public function setSecretCode(?string $secretCode): self
-    {
-        $this->secretCode = $secretCode;
-
-        return $this;
-    }
-
-    public function getIsDoubleAuth(): ?bool
-    {
-        return $this->isDoubleAuth;
-    }
-
-    public function setIsDoubleAuth(bool $isDoubleAuth): self
-    {
-        $this->isDoubleAuth = $isDoubleAuth;
-
-        return $this;
+        $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
 
     /**
