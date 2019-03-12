@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
+    locale: 'fr'
 
 services:
     # default configuration for services in *this* file
@@ -35,7 +35,7 @@ services:
         class: App\Admin\MessageAdmin
         arguments: [~,App\Entity\Message,~]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: Message, label: Message}
+            - {name: sonata.admin, manager_type: orm, group: Message, label: Messages reçus}
     admin.trash:
         class: App\Admin\AdminTrashsAdmin
         arguments: [~,App\Entity\Trashs,~]
@@ -46,3 +46,8 @@ services:
         arguments: [~,App\Entity\Incidents,~]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Incidents, label: Incidents}
+    admin.send.message:
+        class: App\Admin\SendMessageAdmin
+        arguments: [~,App\Entity\Message,~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Message, label: Messages envoyés}
