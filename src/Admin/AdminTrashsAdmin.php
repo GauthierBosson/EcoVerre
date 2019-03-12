@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -39,27 +40,40 @@ class AdminTrashsAdmin extends AbstractAdmin
         $formMapper->add('capacityMax', TextType::class, [
             'label' => 'Capacité maximum'
         ]);
+        $formMapper->add('actualCapacity',TextType::class,[
+            'required'=>false,
+            'label'=>'Nombre de bouteilles à l\'intérieur'
+        ]);
+        $formMapper->add('availability',CheckboxType::class,[
+            'required'=>false,
+            'label'=>'Disponible ?'
+        ]);
+        $formMapper->add('damage',CheckboxType::class,[
+            'required'=>false,
+            'label'=>'Dégradée ?'
+        ]);
 
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('reference');
-        $listMapper->add('address');
+        $listMapper->add('city',null,['label'=>'Ville']);
+        $listMapper->add('address',null,['label'=>'Adresse']);
+        $listMapper->add('availability',null,['label'=>'Disponible ?']);
+        $listMapper->add('damage',null,['label'=>'Dégradée ?']);
+        $listMapper->add('capacityMax',null,['label'=>'Capacité maximum']);
+        $listMapper->add('actualCapacity',null,['label'=>'Nombre de bouteilles actuel']);
 
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('city');
-        $datagridMapper->add('address');
-        $datagridMapper->add('inseeCode');
-        $datagridMapper->add('latitude');
-        $datagridMapper->add('longitude');
-        $datagridMapper->add('altitude');
+        $datagridMapper->add('city',null,['label'=>'Ville']);
+        $datagridMapper->add('address',null,['label'=>'Adresse']);
         $datagridMapper->add('reference');
-        $datagridMapper->add('capacityMax');
-        $datagridMapper->add('actualCapacity');
+        $datagridMapper->add('capacityMax',null,['label'=>'Capacité maximum']);
+        $datagridMapper->add('actualCapacity',null,['label'=>'Nombre de bouteilles']);
     }
 
     public function toString($object)
