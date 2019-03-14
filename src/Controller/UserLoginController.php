@@ -14,9 +14,12 @@ use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticator
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class UserLoginController extends Controller
@@ -27,9 +30,12 @@ final class UserLoginController extends Controller
      */
     private $authenticationUtils;
 
-    public function __construct(AuthenticationUtils $authenticationUtils)
+    private $router;
+
+    public function __construct(AuthenticationUtils $authenticationUtils, RouterInterface $router)
     {
         $this->authenticationUtils = $authenticationUtils;
+        $this->router = $router;
     }
 
     /**
@@ -61,22 +67,71 @@ final class UserLoginController extends Controller
      * @return Response
      * @Route("user/googleSecret", name="generate_user_google_secret")
      */
-    public function googleSecret(GoogleAuthenticatorInterface $googleAuthenticator)
+    public function googleSecret(GoogleAuthenticatorInterface $googleAuthenticator, Request $request)
     {
         $user = $this->getUser();
         $userAuthState = $user->isGoogleAuthenticatorEnabled();
-        dump($userAuthState);
+        $session = new Session();
+        $sessionArr = $session->all();
         $em = $this->getDoctrine()->getManager();
+        dump($sessionArr);
 
         if ($userAuthState === true) {
             return new Response('Double authentification déjà activée');
         } else {
-            $secret = $googleAuthenticator->generateSecret();
-            $user->setGoogleAuthenticatorSecret($secret);
-            $em->persist($user);
-            $em->flush();
+            $form = $this->createFormBuilder()
+                ->add('code', TextType::class)
+                ->add('save', SubmitType::class, ['label' => 'Valider'])
+                ->getForm();
 
-            return $this->redirectToRoute('user_qrcode');
+            $form->handleRequest($request);
+
+            if ($session->has('secret')) {
+                $secret = $sessionArr['secret'];
+                $user->setGoogleAuthenticatorSecret($secret);
+                $url = $googleAuthenticator->getUrl($user);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $data = $form->getData();
+                    $userCode = $data['code'];
+
+                    if ($googleAuthenticator->checkCode($user, $userCode)) {
+                        $em->persist($user);
+                        $em->flush();
+                        $session->clear();
+
+                        return new RedirectResponse($this->router->generate('user_logout'));
+                    }
+                }
+
+                return $this->render('user/qrcode_view.html.twig', [
+                    'url' => $url,
+                    'form' => $form->createView()
+                ]);
+            } else {
+                $secret = $googleAuthenticator->generateSecret();
+                $user->setGoogleAuthenticatorSecret($secret);
+                $session->set('secret', $secret);
+                $url = $googleAuthenticator->getUrl($user);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $data = $form->getData();
+                    $userCode = $data['code'];
+
+                    if ($googleAuthenticator->checkCode($user, $userCode)) {
+                        $em->persist($user);
+                        $em->flush();
+                        $session->clear();
+
+                        return new RedirectResponse($this->router->generate('user_logout'));
+                    }
+                }
+
+                return $this->render('user/qrcode_view.html.twig', [
+                    'url' => $url,
+                    'form' => $form->createView()
+                ]);
+            }
         }
     }
 
@@ -84,13 +139,21 @@ final class UserLoginController extends Controller
      * @param GoogleAuthenticatorInterface $authenticator
      * @Route("user/qrcode", name="user_qrcode")
      */
-    public function qrcode(GoogleAuthenticatorInterface $authenticator)
+    public function qrcode(GoogleAuthenticatorInterface $authenticator): RedirectResponse
     {
         $user = $this->getUser();
+        /*$secret = $user->getGoogleAuthenticatorSecret();
+        dump($secret);
+        die();
         $url = $authenticator->getUrl($user);
-        echo '<img src="'.$url.'" />';
+        return $this->render('user/qrcode_view.html.twig', [
+            'url' => $url
+        ]);*/
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
 
-        return new Response();
+        return new RedirectResponse($this->router->generate('sonata_admin_dashboard'));
     }
 
     /**
