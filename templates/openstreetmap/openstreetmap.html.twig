@@ -117,7 +117,20 @@
                     return feature.properties && feature.properties.style;
                 },
                 pointToLayer: function (feature, latlng) {
-                    var marker = L.marker(latlng);
+                    if (feature.properties.available == 1 && feature.properties.damaged == 0 ){
+                   var  myIcon = L.icon({
+                        iconUrl: "{{ asset('/img/garbage.png') }}"
+                    });
+                    }else if(feature.properties.available == 1 && feature.properties.damaged == 1) {
+                        var  myIcon = L.icon({
+                            iconUrl: "{{ asset('/img/damaged.png') }}"
+                        });
+                    }else {
+                        var  myIcon = L.icon({
+                            iconUrl: "{{ asset('/img/delete.png') }}"
+                        });
+                    }
+                    var marker = L.marker(latlng,{icon:myIcon});
 
                     // Detail du Popup
                     if (feature.properties.actualCapacity > 1500){
