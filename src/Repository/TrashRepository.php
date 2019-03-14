@@ -90,7 +90,8 @@ class TrashRepository
                 //$gps= $gps[0]['elevation'];
                 $file[0]['features'][$i]['properties']['maxCapacity'] = 2000;
                 $file[0]['features'][$i]['properties']['actualCapacity'] = rand(0,2000);
-
+                $file[0]['features'][$i]['properties']['available'] = rand(0,1);
+                $file[0]['features'][$i]['properties']['damaged'] = rand(0,1);
 
                 //array_push($file[0]['features'][$i]['geometry']['coordinates'],$gps);
 

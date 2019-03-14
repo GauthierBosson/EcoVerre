@@ -23,7 +23,7 @@ class TrashController extends AbstractController
 
 
         if ($request->isMethod('POST')) {
-            $trash->addJsonObject();
+            $trash->addElevationJson();
         }
 
         return $this->render('trash.html.twig',[]);
