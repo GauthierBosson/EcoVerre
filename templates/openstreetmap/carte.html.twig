@@ -19,7 +19,7 @@
 
 
 
-    <script src="{{ asset('json/recup-verre.geojson') }}"></script>
+    <script src="{{ asset('json/recup.js') }}"></script>
 
     <style>
         .popup-fixed {
@@ -72,7 +72,12 @@
                     }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
                         + '<b>Commune:</b>' + feature.properties.commune + '<br>'
-                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>');
+                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
+                        + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + feature.properties.adresse + ',+31280+'
+                        + feature.properties.commune + '/@' + feature.geometry.coordinates[1] + ',' + feature.geometry.coordinates[0] + '">');
+
+
+
 
                     marker.bindPopup(popup);
                     return marker;
@@ -113,13 +118,7 @@
             </div>
         </div>
     </div>
-    <div id='inputs'></div>
-    <div id="calcul">
-        <div id='directions'>
-            <div id='routes'></div>
-            <div id='instructions'></div>
-        </div>
-    </div>
+
 
     {% block javascripts %}
 

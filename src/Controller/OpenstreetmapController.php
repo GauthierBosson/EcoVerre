@@ -9,6 +9,10 @@ use Symfony\Component\Config\FileLocator;
 
 class OpenstreetmapController extends AbstractController
 {
+
+
+    //carte pour utilisateur
+
     /**
      * @Route("/openstreetmap", name="openstreetmap")
      */
@@ -53,6 +57,20 @@ class OpenstreetmapController extends AbstractController
     public function map()
     {
         return $this->render('openstreetmap/index.html.twig', [
+            'controller_name' => 'OpenstreetmapController',
+        ]);
+
+    }
+
+
+    //carte referent et admin
+
+    /**
+     * @Route("/carte", name="carte")
+     */
+    public function carteRef()
+    {
+        return $this->render('openstreetmap/carte.html.twig', [
             'controller_name' => 'OpenstreetmapController',
         ]);
 
