@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use BotMan\Drivers\Web\WebDriver;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\BotMan\Middleware\ApiAi;
 
 
-class WidgetController extends Controller {
+class WidgetController extends AbstractController {
 
     /**
      * @Route("/message", name="message")
@@ -34,13 +35,18 @@ class WidgetController extends Controller {
             $bot->reply($botService->handleIncident());
         });
 
-        $botman->hears('(Qui|qui) est le référend de ma ville', function (BotMan $bot) use ($botService) {
-           $bot->reply($botService->handleReferend());
+        $botman->hears('(Qui|qui) est le référent de ma ville', function (BotMan $bot) use ($botService) {
+            $bot->reply($botService->handleReferent());
         });
 
-        $botman->hears('(Qui|qui) prévenir en cas (d\'incidents|d\'incidents) ', function (BotMan $bot) use ($botService) {
-            $bot->reply($botService->handleReferend2());
+        $botman->hears('(Qui|qui) prévenir en cas (d\'incidents|d\'incident)', function (BotMan $bot) use ($botService) {
+            $bot->reply($botService->handleReferent2());
         });
+
+        $botman->hears('(Toulouse|toulouse)', function (BotMan $bot) use ($botService) {
+            $bot->reply($botService->handleAskReferent());
+    });
+
 
         // Start listening
         $botman->listen();
