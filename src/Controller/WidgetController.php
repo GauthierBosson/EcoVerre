@@ -45,7 +45,11 @@ class WidgetController extends AbstractController {
 
         $botman->hears('(Toulouse|toulouse)', function (BotMan $bot) use ($botService) {
             $bot->reply($botService->handleAskReferent());
-    });
+        });
+
+        $botman->hears('help', function (Botman $bot) use ($botService) {
+            $bot->reply($botService->handleHelp());
+        });
 
 
         // Start listening

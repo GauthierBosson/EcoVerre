@@ -46,9 +46,20 @@ class BotServices extends AbstractController
         $name = $user->getName();
         $firstname = $user->getFirstname();
 
-        $responses = ['Le référent de Toulouse est ' .$name  .$firstname ];
+        $responses = ['Le référent de Toulouse est ' .$name .' ' .$firstname ];
 
         return $responses[array_rand($responses)];
+    }
+
+    public function handleHelp()
+    {
+        $responses = ['Voici la liste des questions que vous pouvez poser : 
+                       - Où se trouve le rapport d\'incident 
+                       - Qui est le référent de mma ville 
+                       - Qui prévenir en cas d\'incidents'];
+
+        return $responses[array_rand($responses)];
+
     }
 
 }
