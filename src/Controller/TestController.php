@@ -24,6 +24,7 @@ class TestController extends AbstractController
      * @throws \Exception
      * @Route("/security/add", name="add_admin")
      */
+
     public function addAdmin(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $entityManager = $this->getDoctrine()->getManager();
