@@ -15,42 +15,27 @@
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ path('sonata_admin_dashboard') }}">
-                <span>Login</span>
+                <span>Activer la double authentification</span>
             </a>
         </div>
         <div class="login-box-body">
 
-                <p class="login-box-msg">{{ 'Authentication'|trans }}</p>
-                <!--<form action="{{ path("generate_user_google_secret") }}" method="post" role="form">-->
+                <!--<p class="login-box-msg">{{ 'Authentication'|trans }}</p>-->
                 {{ form_start(form) }}
 
                     <div class="form-group has-feedback text-center">
                         <img src="{{ url }}" />
                     </div>
-
-                    <!--<div class="form-group has-feedback">
-                        <input type="text" class="form-control" id="password" name="code" required="required" placeholder="Code double authentification"/>
-                    </div>-->
-
                     <div class="form-group has-feedback">
                         {{ form_widget(form.code, { 'attr': {'class': 'form-control', 'placeholder': 'Code double authentification'} }) }}
                     </div>
 
-
-
-                    <!--<div class="row">
-                        <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Activer</button>
-                        </div>
-                    </div>-->
                     <div class="row">
                         <div class="col-xs-4">
                             {{ form_widget(form.save, { 'attr': {'class': 'btn btn-primary btn-block btn-flat'}} ) }}
                         </div>
                     </div>
                 {{ form_end(form) }}
-                <!--</form>-->
-
         </div>
     </div>
 {% endblock sonata_wrapper %}
