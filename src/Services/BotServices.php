@@ -55,7 +55,7 @@ class BotServices extends AbstractController
     {
         $responses = ['Voici la liste des questions que vous pouvez poser : 
                        - Où se trouve le rapport d\'incident 
-                       - Qui est le référent de mma ville 
+                       - Qui est le référent de ma ville 
                        - Qui prévenir en cas d\'incidents'];
 
         return $responses[array_rand($responses)];
