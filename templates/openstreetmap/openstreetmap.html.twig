@@ -173,19 +173,31 @@
 
                 // Detail du Popup
                 if (marker[i].feature.properties.actualCapacity > 1500){
-                    var popup = '<b><u>Description de la benne</u></b><br>'
+                    var popup = L.popup({
+                        pane: 'fixed',
+                        className: 'popup-fixed',
+                        autoPan: false,
+                    }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Adresse : </b>' + marker[i].feature.properties.adresse + '<br>'
                         + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
                         + '<b>Code commune : </b>' + marker[i].feature.properties.code_com + '<br>'
-                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>'
+                        + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + marker[i].feature.properties.adresse + ',+31280+'
+                        + marker[i].feature.properties.commune + '/@' + marker[i].feature.geometry.coordinates[1] + ',' + marker[i].feature.geometry.coordinates[0] + ' "> <br>'
+                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>')
                     ;
 
                 }else{
-                    var popup ='<b><u>Description de la benne</u></b><br>'
+                    var popup = L.popup({
+                        pane: 'fixed',
+                        className: 'popup-fixed',
+                        autoPan: false,
+                    }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Adresse : </b>' + marker[i].feature.properties.adresse + '<br>'
                         + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
                         + '<b>Code commune : </b>' + marker[i].feature.properties.code_com + '<br>'
-                        + '<b>Capacité : La poubelle</b>' + '<br>'
+                        + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + marker[i].feature.properties.adresse + ',+31280+'
+                        + marker[i].feature.properties.commune + '/@' + marker[i].feature.geometry.coordinates[1] + ',' + marker[i].feature.geometry.coordinates[0] + '"> <br>'
+                        + '<b>Capacité : La poubelle</b>' + '<br>')
                     ;
                 }
                 console.log(marker[i]);
