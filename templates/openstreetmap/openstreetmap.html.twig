@@ -21,10 +21,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/graphhopper-js-api-client/dist/graphhopper-client.js"></script>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster-src.js"></script>
     <script src="{{ asset('json/recup.js') }}"></script>
 
     <style>
+        .mycluster {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            line-height: 40px;
+            margin-top: -20px;
+            margin-left: -20px;
+        }
         .popup-fixed {
             position: fixed;
             top: auto;
@@ -89,7 +101,10 @@
                 }))
                 .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
-
+            L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                subdomains: ['a','b','c']
+            }).addTo( map );
             // move the attribution control out of the way
             map.attributionControl.setPosition('bottomright');
 
@@ -124,53 +139,66 @@
             geojson = L.geoJson(Verre, {
                 style: function (feature) {
                     return feature.properties && feature.properties.style;
-                },
-                pointToLayer: function (feature, latlng) {
-                    if (feature.properties.available == 1 && feature.properties.damaged == 0 ){
-                   var  myIcon = L.icon({
+                }
+            });
+            var markerClusters = new L.MarkerClusterGroup({
+                iconCreateFunction: function(cluster) {
+                    return L.divIcon({
+                        html:cluster.getChildCount(),
+                        className: 'mycluster',
+                        iconSize: null
+                    });
+                }
+            });
+            var marker = geojson.getLayers();
+
+            for ( var i = 0; i < marker.length; ++i )
+            {
+                console.log(marker[i]);
+                if (marker[i].feature.properties.available == 1 && marker[i].feature.properties.damaged == 0 ){
+                    var  myIcon = L.icon({
                         iconUrl: "{{ asset('/img/garbage.png') }}"
                     });
-                    }else if(feature.properties.available == 1 && feature.properties.damaged == 1) {
-                        var  myIcon = L.icon({
-                            iconUrl: "{{ asset('/img/damaged.png') }}"
-                        });
-                    }else {
-                        var  myIcon = L.icon({
-                            iconUrl: "{{ asset('/img/delete.png') }}"
-                        });
-                    }
-                    var marker = L.marker(latlng,{icon:myIcon});
-
-                    // Detail du Popup
-                    if (feature.properties.actualCapacity > 1500){
-                    var popup = L.popup({
-                        pane: 'fixed',
-                        className: 'popup-fixed',
-                        autoPan: false,
-                    }).setContent('<b><u>Description de la benne</u></b><br>'
-                        + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
-                        + '<b>Commune:</b>' + feature.properties.commune + '<br>'
-                        + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
-                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>'
-                    );
-
-                    }else{
-                        var popup = L.popup({
-                            pane: 'fixed',
-                            className: 'popup-fixed',
-                            autoPan: false,
-                        }).setContent('<b><u>Description de la benne</u></b><br>'
-                            + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
-                            + '<b>Commune:</b>' + feature.properties.commune + '<br>'
-                            + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
-                            + '<b>Capacité : La poubelle</b>' + '<br>'
-                        );
-                    }
-                    marker.bindPopup(popup);
-                    return marker;
+                }else if(marker[i].feature.properties.available == 1 && marker[i].feature.properties.damaged == 1) {
+                    var  myIcon = L.icon({
+                        iconUrl: "{{ asset('/img/damaged.png') }}"
+                    });
+                }else {
+                    var  myIcon = L.icon({
+                        iconUrl: "{{ asset('/img/delete.png') }}"
+                    });
                 }
-            }).addTo(map);
+             //   var marker = L.marker(latlng,{icon:myIcon});
 
+
+                // Detail du Popup
+                if (marker[i].feature.properties.actualCapacity > 1500){
+                    var popup = '<b><u>Description de la benne</u></b><br>'
+                        + '<b>Adresse : </b>' + marker[i].feature.properties.adresse + '<br>'
+                        + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
+                        + '<b>Code commune : </b>' + marker[i].feature.properties.code_com + '<br>'
+                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>'
+                    ;
+
+                }else{
+                    var popup ='<b><u>Description de la benne</u></b><br>'
+                        + '<b>Adresse : </b>' + marker[i].feature.properties.adresse + '<br>'
+                        + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
+                        + '<b>Code commune : </b>' + marker[i].feature.properties.code_com + '<br>'
+                        + '<b>Capacité : La poubelle</b>' + '<br>'
+                    ;
+                }
+                console.log(marker[i]);
+
+                var m = L.marker([marker[i]._latlng.lat, marker[i]._latlng.lng] , {icon: myIcon})
+                    .bindPopup(popup)
+                    ;
+
+                markerClusters.addLayer( m );
+
+            }
+
+            map.addLayer( markerClusters );
             // ajout de la géolocalisation
             map.locate({setMarker: true, watch: true}) /* This will return map so you can do chaining */
                 .on('locationfound', function (e) {
@@ -207,10 +235,10 @@
     </div>
     <div id='inputs'></div>
     <div id="calcul">
-        <div id='directions'>
-            <div id='routes'></div>
-            <div id='instructions'></div>
-        </div>
+    <div id='directions'>
+        <div id='routes'></div>
+        <div id='instructions'></div>
+    </div>
     </div>
 
     {% block javascripts %}
