@@ -80,12 +80,11 @@ class TrashAdmin extends AbstractAdmin
     public function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->with('Benne ', [
+            ->with('Benne : ' . $showMapper->getAdmin()->getSubject()->getReference(), [
                 'class'       => 'col-md-12',
                 'box_class'   => 'box box-solid box-primary',
                 'description' => 'Votre benne',
             ])
-            ->add('reference', null, ['label' => 'Référence'])
             ->add('address', null, ['label' => 'Adresse'])
             ->add('actualCapacity', null, ['label' => 'Capacité'])
             ->end()

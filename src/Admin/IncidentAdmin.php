@@ -82,14 +82,12 @@ class IncidentAdmin extends AbstractAdmin
 
     public function configureShowFields(ShowMapper $showMapper)
     {
-        dump($this->getRequest());
         $showMapper
-            ->with('Incident ', [
+            ->with('Incident : ' . $showMapper->getAdmin()->getSubject()->getReference(), [
                 'class'       => 'col-md-12',
                 'box_class'   => 'box box-solid box-danger',
                 'description' => 'Votre benne',
             ])
-            ->add('reference', null, ['label' => 'Référence'])
             ->add('email', null, ['label' => 'Email'])
             ->add('description', null, ['label' => 'Description'])
             ->add('date', null, ['label' => 'Date'])

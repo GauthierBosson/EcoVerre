@@ -99,15 +99,16 @@ class SendMessageReferentAdmin extends AbstractAdmin
 
     public function configureShowFields(ShowMapper $showMapper)
     {
+        dump($showMapper->getAdmin()->getSubject());
         $showMapper
-            ->with('Message', [
+            ->with('Message : ' . $showMapper->getAdmin()->getSubject()->getObject(), [
                 'class'       => 'col-md-12',
                 'box_class'   => 'box box-solid box-primary',
                 'description' => 'Votre message',
             ])
-            ->add('object')
-            ->add('content')
-            ->end()
+                ->add('content', null, ['label' => 'Contenu'])
+                ->add('date', null, ['label' => 'Date'])
+                ->end()
             ->end()
         ;
     }
