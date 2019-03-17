@@ -23,7 +23,7 @@ body {
 
 
 #map {
-    margin-bottom: 1rem;
+    height: 500px;
 }
 
 
@@ -35,6 +35,10 @@ h5,
 h6 {
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
+}
+
+h2{
+    color: #a59e9e;;
 }
 
 h3,
@@ -118,6 +122,7 @@ header.masthead .overlay {
 .contact {
     position: relative;
     background-color: #bdbebf;
+    background-image: url("/img/verref3.png");
     background-size: cover;
     padding-top: 7rem;
     padding-bottom: 7rem;
@@ -138,3 +143,7 @@ footer.footer {
     padding-bottom: 4rem;
 }
 
+
+.btn-primary {
+    background-color: #07644f !important;
+}
