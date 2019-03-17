@@ -18,8 +18,12 @@ class ReferentPasswordType extends AbstractType
 
         $builder
             ->add('email',EmailType::class)
-            ->add('password',PasswordType::class)
-            ->add('key',TextType::class);
+            ->add('password',PasswordType::class,[
+                'label'=>'Mot de passe'
+            ])
+            ->add('key',TextType::class,[
+                'label'=>'Clé de sécurité'
+            ]);
     }
 
 }
