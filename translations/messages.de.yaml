@@ -1,2 +1,22 @@
 menu:
   titre: Hallo und herzlich willkommen !
+carte:
+  titre: SAMMLUNG VON GLAS
+  partenaire: In Zusammenarbeit mit Eco-Emballages beschleunigt Toulouse Métropole sein Recyclinginstallationsprogramm.
+
+
+description:
+  titre: Finden Sie das nächstgelegene Terminal in Toulouse
+  collecte: Die Abholung ist freiwillig. Es liegt an jedem, Flaschen und Gläser in grünen Behältern abzustellen, die in vielen Stadtteilen installiert sind.
+  titre2: Was muss ich im Glasterminal hinterlegen?
+  deposer: Flaschen, Gläser, Gläser ohne Kapsel oder Kappe.
+  circuit: Das Ziel der Glasumschaltung Albi
+
+contact:
+  contact: Kontaktieren Sie uns?
+
+footer:
+  link1: Über
+  link2: Kontakt
+  link3: Nutzungsbedingungen
+  link4:  Datenschutzbestimmungen
