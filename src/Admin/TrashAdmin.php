@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -66,9 +67,30 @@ class TrashAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('reference');
+        $listMapper
+            ->addIdentifier('reference', null, [
+                'route' => [
+                    'name' => 'show'
+                ]
+            ]);
         $listMapper->add('address');
         $listMapper->add('actualCapacity');
+    }
+
+    public function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->with('Benne ', [
+                'class'       => 'col-md-12',
+                'box_class'   => 'box box-solid box-primary',
+                'description' => 'Votre benne',
+            ])
+            ->add('reference', null, ['label' => 'Référence'])
+            ->add('address', null, ['label' => 'Adresse'])
+            ->add('actualCapacity', null, ['label' => 'Capacité'])
+            ->end()
+            ->end()
+        ;
     }
 
     public function toString($object)

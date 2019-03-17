@@ -100,7 +100,6 @@ class SendMessageReferentAdmin extends AbstractAdmin
     public function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->tab('General') // the tab call is optional
             ->with('Message', [
                 'class'       => 'col-md-12',
                 'box_class'   => 'box box-solid box-primary',

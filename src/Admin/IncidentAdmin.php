@@ -12,10 +12,12 @@ namespace App\Admin;
 use App\Entity\Incidents;
 use App\Entity\Trashs;
 use Doctrine\ORM\EntityRepository;
+use function Sodium\add;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -70,8 +72,30 @@ class IncidentAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('reference');
+        $listMapper->addIdentifier('reference', null, [
+            'route' => [
+                'name' => 'show'
+            ]
+        ]);
         $listMapper->add('date');
+    }
+
+    public function configureShowFields(ShowMapper $showMapper)
+    {
+        dump($this->getRequest());
+        $showMapper
+            ->with('Incident ', [
+                'class'       => 'col-md-12',
+                'box_class'   => 'box box-solid box-danger',
+                'description' => 'Votre benne',
+            ])
+            ->add('reference', null, ['label' => 'Référence'])
+            ->add('email', null, ['label' => 'Email'])
+            ->add('description', null, ['label' => 'Description'])
+            ->add('date', null, ['label' => 'Date'])
+            ->end()
+            ->end()
+        ;
     }
 
     public function toString($object)
