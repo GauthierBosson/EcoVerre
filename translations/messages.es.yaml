@@ -1,2 +1,21 @@
 menu:
   titre: Buenos días y bienvenido !
+carte:
+  titre: COLECCIÓN DE CRISTAL
+  partenaire: En partenariat avec Eco-Emballages, Toulouse Métropole accélère son programme d'installation de récup'verre.
+
+description:
+  titre: En asociación con Eco-Emballages, Toulouse Métropole está acelerando su programa de instalación de reciclaje.
+  collecte: La recogida de vidrio es voluntaria. Depende de todos depositar botellas y frascos en contenedores verdes, instalados en muchas partes de la ciudad.
+  titre2: ¿Qué depositar en la terminal de vidrio?
+  deposer: Botellas, frascos, frascos sin cápsulas o cápsulas.
+  circuit: El circuito de cristal destino Albi.
+
+contact:
+  contact: Contactanos
+
+footer:
+  link1: A proposito
+  link2: Contactar
+  link3: Condiciones de uso
+  link4: política de confidencialidad
