@@ -50,6 +50,16 @@ class BotServices extends AbstractController
 
         return $responses[array_rand($responses)];
     }
+    public function handleAskReferent3()
+    {
+        $user =$this->getDoctrine()->getRepository(Users::class)->findOneBy(['city' => 'Rouen']);
+        $name = $user->getName();
+        $firstname = $user->getFirstname();
+
+        $responses = ['Le référent de Rouen est ' .$name .' ' .$firstname ];
+
+        return $responses[array_rand($responses)];
+    }
 
     public function handleHelp()
     {
