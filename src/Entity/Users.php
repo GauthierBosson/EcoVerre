@@ -58,9 +58,6 @@ class Users implements UserInterface, TwoFactorInterface
      */
     private $googleAuthenticatorSecret;
 
-
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +167,13 @@ class Users implements UserInterface, TwoFactorInterface
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
 
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
     public function getSalt()
     {
         return null;
@@ -195,6 +199,4 @@ class Users implements UserInterface, TwoFactorInterface
     {
         return null;
     }
-
-
 }

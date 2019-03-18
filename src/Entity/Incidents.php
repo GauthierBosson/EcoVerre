@@ -40,8 +40,7 @@ class Incidents
      * @ORM\Column(type="string", length=255)
      */
     private $city;
-
-
+  
     /**
      * @ORM\Column(type="text")
      */
@@ -51,6 +50,22 @@ class Incidents
      * @ORM\ManyToOne(targetEntity="Trashs")
      */
     private $trash;
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city): void
+    {
+        $this->city = $city;
+    }
 
     /**
      * @return mixed
@@ -133,8 +148,6 @@ class Incidents
 
         return $this;
     }
-
-
 
     public function getDescription(): ?string
     {

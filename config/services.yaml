@@ -7,6 +7,26 @@ parameters:
     locale: 'fr'
 
 services:
+    admin.trash:
+        class: App\Admin\TrashAdmin
+        arguments: [~, App\Entity\Trashs, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, group: Gestion des bennes, label: Bennes }
+    admin.incident:
+        class: App\Admin\IncidentAdmin
+        arguments: [~, App\Entity\Incidents, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, group: Gestion des bennes, label: Incidents }
+    admin.message:
+        class: App\Admin\MessageReferentAdmin
+        arguments: [~, App\Entity\Message, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, group: Messages, label: Messages reçus }
+    admin.sendmessage:
+        class: App\Admin\SendMessageReferentAdmin
+        arguments: [~, App\Entity\Message, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, group: Messages, label: Messages envoyés }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

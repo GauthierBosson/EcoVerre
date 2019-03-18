@@ -1,4 +1,8 @@
 sonata_admin:
+    templates:
+        show: 'Admin/display_message.html.twig'
+        dashboard: 'user/dashboard_user.html.twig'
+        user_block: 'user/user_block.html.twig'
     title: 'Green World'
     title_logo: /bundles/sonataadmin/LOGO1.png
     dashboard:
