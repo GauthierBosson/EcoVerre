@@ -52,6 +52,44 @@
 
 
 
+
+                <script>
+
+
+
+                    window.onload = function () {
+                        console.log('Page chargée ');
+
+                        var map = L.map('map').setView([43.6005, 1.3472], 11);
+                        var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                            maxZoom: 18,
+                            id: 'mapbox.streets',
+                            accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
+                        }).addTo(map);
+
+                        // Add baseLayers to the map
+                        geojson = L.geoJson(Verre, {
+                            style: function (feature) {
+                                return feature.properties && feature.properties.style;
+                            },
+                            pointToLayer: function (feature, latlng) {
+                                var marker =  L.marker(latlng);
+                                marker.bindPopup('<b><u>Description de la benne</u></b><br>'
+                                    + '<b>Commune:</b>'+ feature.properties.commune + '<br>'
+                                    + '<b>Adresse : </b>' + feature.properties.adresse + '<br>'
+                                    + '<b>Code commune : </b>' + feature.properties.code_com + '<br>'
+                                );
+                                return marker ;
+
+                            }
+                        }).addTo(map);
+
+
+                    }
+
+                </script>
+
+
         {% endblock %}
     </body>
 </html>
