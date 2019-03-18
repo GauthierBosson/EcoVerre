@@ -8,7 +8,7 @@ parameters:
 
 services:
     admin.trash:
-        class: App\Admin\TrashAdmin
+        class: App\Admin\AdminTrashsAdmin
         arguments: [~, App\Entity\Trashs, ~]
         tags:
         - { name: sonata.admin, manager_type: orm, group: Gestion des bennes, label: Bennes }
@@ -22,7 +22,7 @@ services:
         arguments: [~, App\Entity\Message, ~]
         tags:
         - { name: sonata.admin, manager_type: orm, group: Messages, label: Messages reçus }
-    admin.sendmessage:
+    admin.send.message:
         class: App\Admin\SendMessageReferentAdmin
         arguments: [~, App\Entity\Message, ~]
         tags:
@@ -51,23 +51,3 @@ services:
         arguments: [~,App\Entity\Users,~]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Utilisateurs ,label: Utilisateurs}
-    admin.message:
-        class: App\Admin\MessageAdmin
-        arguments: [~,App\Entity\Message,~]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Messages, label: Messages reçus}
-    admin.trash:
-        class: App\Admin\AdminTrashsAdmin
-        arguments: [~,App\Entity\Trashs,~]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Bennes, label: Bennes}
-    admin.incidents:
-        class: App\Admin\AdminIncidentsAdmin
-        arguments: [~,App\Entity\Incidents,~]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Incidents, label: Incidents}
-    admin.send.message:
-        class: App\Admin\SendMessageAdmin
-        arguments: [~,App\Entity\Message,~]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Messages, label: Messages envoyés}

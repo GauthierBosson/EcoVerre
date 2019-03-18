@@ -1,8 +1,5 @@
 sonata_admin:
-    templates:
-        show: 'Admin/display_message.html.twig'
-        dashboard: 'user/dashboard_user.html.twig'
-        user_block: 'user/user_block.html.twig'
+
     title: 'Green World'
     title_logo: /bundles/sonataadmin/LOGO1.png
     dashboard:
@@ -41,6 +38,7 @@ sonata_admin:
                 color: bg-success               # colors: bg-green, bg-red and bg-aqua
                 filters:                         # filter values
                   edited: { value: 1 }
+
     templates:
         dashboard: 'admin/dashboard_custom.html.twig'
         user_block: 'admin/user_block_custom.html.twig'

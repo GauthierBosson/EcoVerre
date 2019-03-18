@@ -49,9 +49,7 @@ class SendMessageReferentAdmin extends AbstractAdmin
             'query_builder' => function(EntityRepository $er) {
                 $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
                 return $er->createQueryBuilder('user')
-                    ->where('user.city = :city')
-                    ->andWhere('user.email != :email')
-                    ->setParameter('city', $user->getCity())
+                    ->where('user.email != :email')
                     ->setParameter('email', $user->getEmail());
             },
             'choice_label' => 'email'

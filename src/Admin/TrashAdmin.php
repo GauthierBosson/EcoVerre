@@ -101,12 +101,17 @@ class TrashAdmin extends AbstractAdmin
 
     public function createQuery($context = 'list')
     {
-        $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $query = parent::createQuery($context);
-        $query->andWhere(
-            $query->expr()->eq($query->getRootAliases()[0] . '.city', ':my_param')
-        );
-        $query->setParameter('my_param', $user->getCity());
+        $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+        if($user->getCity() != null) {
+
+
+            $query->andWhere(
+                $query->expr()->eq($query->getRootAliases()[0] . '.city', ':my_param')
+            );
+            $query->setParameter('my_param', $user->getCity());
+            return $query;
+        }
         return $query;
     }
 

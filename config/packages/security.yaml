@@ -3,7 +3,7 @@ security:
         ROLE_USER: [ROLE_USER, ROLE_SONATA_ADMIN]
         SONATA:
             - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
-        ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
+        ROLE_ADMIN:       [ROLE_SONATA_ADMIN]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     encoders:
         App\Entity\Users: bcrypt
@@ -15,21 +15,7 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        user:
-            pattern: /user(.*)
-            form_login:
-                provider: users
-                login_path: user_login
-                use_forward: false
-                check_path: user_login
-                failure_path: null
-            logout:
-                path: user_logout
-                target: user_login
-            anonymous: true
-            guard:
-                authenticators:
-                    - App\Security\UserLoginAuthenticator
+
         admin:
             pattern:            /admin(.*)
             form_login:
@@ -61,9 +47,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/user/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/, role: [ROLE_USER, ROLE_SONATA_ADMIN] }
+        - { path: ^/user/addPassword/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/dashboard, role: [ROLE_ADMIN, ROLE_USER] }
+        - { path: ^/admin/app/users/, role: ROLE_ADMIN }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/2fa/check, role: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }
@@ -77,8 +63,6 @@ security:
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        - { path: ^/admin/dashboard, role: ROLE_ADMIN }
-        - { path: ^/admin/app, role: ROLE_ADMIN }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
         - { path: ^/admin/2fa/check, role: ROLE_ADMIN }

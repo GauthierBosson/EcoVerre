@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,12 +26,19 @@ class AdminTrashsAdmin extends AbstractAdmin
         $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
 
+        if($user->getCity()=== null){
+            $formMapper->add('city', TextType::class, [
+                'label' => 'Ville'
+
+            ]);
+        } else {
+            $formMapper->add('city', HiddenType::class, [
+                'data' => $user->getCity()
+
+            ]);
+        }
 
 
-        $formMapper->add('city', TextType::class, [
-            'label' => 'Ville'
-
-        ]);
         $formMapper->add('address', TextType::class, [
             'label' => 'Adresse'
         ]);
@@ -57,7 +65,7 @@ class AdminTrashsAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('reference');
+        $listMapper->addIdentifier('reference',null,['route'=>['name'=>'show']]);
         $listMapper->add('city',null,['label'=>'Ville']);
         $listMapper->add('address',null,['label'=>'Adresse']);
         $listMapper->add('availability',null,['label'=>'Disponible ?']);
@@ -65,6 +73,35 @@ class AdminTrashsAdmin extends AbstractAdmin
         $listMapper->add('capacityMax',null,['label'=>'Capacité maximum']);
         $listMapper->add('actualCapacity',null,['label'=>'Nombre de bouteilles actuel']);
 
+    }
+
+    public function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->with('Benne : ' . $showMapper->getAdmin()->getSubject()->getReference(), [
+                'class'       => 'col-md-12',
+                'box_class'   => 'box box-solid box-primary',
+                'description' => 'Votre benne',
+            ])
+            ->add('address', null, ['label' => 'Adresse'])
+            ->add('actualCapacity', null, ['label' => 'Capacité'])
+            ->end()
+            ->end()
+        ;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $query = parent::createQuery($context);
+        if($user->getCity() != null) {
+            $query->andWhere(
+                $query->expr()->eq($query->getRootAliases()[0] . '.city', ':my_param')
+            );
+            $query->setParameter('my_param', $user->getCity());
+        }
+
+        return $query;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

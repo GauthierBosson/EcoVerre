@@ -9,9 +9,11 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
 final class UsersAdmin extends AbstractAdmin
@@ -28,6 +30,8 @@ final class UsersAdmin extends AbstractAdmin
 
 
     }
+
+
 
 
     protected function configureFormFields(FormMapper $form)
@@ -65,7 +69,7 @@ final class UsersAdmin extends AbstractAdmin
         $listMapper->add('email');
         $listMapper->add('city',null,['label'=>'Ville']);
     }
-
+    
 
     public function toString($object)
     {
@@ -96,6 +100,8 @@ final class UsersAdmin extends AbstractAdmin
 
 
     }
+
+
 
     public function prePersist($object)
     {

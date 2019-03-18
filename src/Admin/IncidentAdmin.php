@@ -35,16 +35,27 @@ class IncidentAdmin extends AbstractAdmin
         $formMapper->add('date', DateType::class, [
             'label' => 'Date'
         ]);
-        $formMapper->add('trash', EntityType::class, [
-            'class' => Trashs::class,
-            'query_builder' => function(EntityRepository $er) {
-                $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
-                return $er->createQueryBuilder('trash')
-                    ->where('trash.city = :city')
-                    ->setParameter('city', $user->getCity());
-            },
-            'choice_label' => 'reference'
-        ]);
+
+        if($user->getCity() != null){
+            $formMapper->add('trash', EntityType::class, [
+                'class' => Trashs::class,
+                'query_builder' => function(EntityRepository $er) {
+                    $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+                    return $er->createQueryBuilder('trash')
+                        ->where('trash.city = :city')
+                        ->setParameter('city', $user->getCity());
+                },
+                'choice_label' => 'reference',
+                'label'=>'Benne'
+            ]);
+        }else {
+            $formMapper->add('trash', EntityType::class, [
+                'class' => Trashs::class,
+                'choice_label' => 'reference',
+                'label'=>'Benne'
+            ]);
+        }
+
         $formMapper->add('email', HiddenType::class, [
             'label' => 'Email',
             'data' => $user->getEmail()
@@ -107,10 +118,14 @@ class IncidentAdmin extends AbstractAdmin
     {
         $user = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
         $query = parent::createQuery($context);
-        $query->andWhere(
-            $query->expr()->eq($query->getRootAliases()[0] . '.city', ':my_param')
-        );
-        $query->setParameter('my_param', $user->getCity());
+        if($user->getCity() != null) {
+            $query->andWhere(
+                $query->expr()->eq($query->getRootAliases()[0] . '.city', ':my_param')
+            );
+            $query->setParameter('my_param', $user->getCity());
+            return $query;
+        }
+
         return $query;
     }
 }

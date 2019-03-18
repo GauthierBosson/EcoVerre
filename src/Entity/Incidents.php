@@ -137,7 +137,7 @@ class Incidents
         return $this;
     }
 
-    public function getCity(): ?string
+    /*public function getCity(): ?string
     {
         return $this->city;
     }
@@ -147,7 +147,7 @@ class Incidents
         $this->city = $city;
 
         return $this;
-    }
+    }*/
 
     public function getDescription(): ?string
     {
