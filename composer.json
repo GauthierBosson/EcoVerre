@@ -7,7 +7,7 @@
         "ext-iconv": "*",
         "scheb/two-factor-bundle": "^3.17",
         "sensio/framework-extra-bundle": "^5.1",
-        "sonata-project/admin-bundle": "^3.45",
+        "sonata-project/admin-bundle": "^3.46",
         "sonata-project/doctrine-orm-admin-bundle": "^3.8",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",

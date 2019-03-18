@@ -1,16 +1,54 @@
 sonata_admin:
-    title: 'Sonata Admin'
     templates:
         show: 'Admin/display_message.html.twig'
         dashboard: 'user/dashboard_user.html.twig'
         user_block: 'user/user_block.html.twig'
+    title: 'Green World'
+    title_logo: /bundles/sonataadmin/LOGO1.png
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
-
+            -
+              class:    col-lg-3 col-xs-6          # twitter bootstrap responsive code
+              position: top                        # zone in the dashboard
+              type:     sonata.admin.block.stats   # block id
+              settings:
+                  code:  admin.users    # admin code - service id
+                  icon:  fa-magic                  # font awesome icon
+                  text:  Nombre d'utilisateurs
+                  color: bg-yellow                 # colors: bg-green, bg-red and bg-aqua
+                  filters:                         # filter values
+                      edited: { value: 1 }
+            -
+              class:    col-lg-3 col-xs-6          # twitter bootstrap responsive code
+              position: top                        # zone in the dashboard
+              type:     sonata.admin.block.stats   # block id
+              settings:
+                  code:  admin.message    # admin code - service id
+                  icon:  fa-magic                  # font awesome icon
+                  text:  Nombre de messages
+                  color: bg-primary                # colors: bg-green, bg-red and bg-aqua
+                  filters:                         # filter values
+                      edited: { value: 1 }
+            -
+              class:    col-lg-3 col-xs-6          # twitter bootstrap responsive code
+              position: top                        # zone in the dashboard
+              type:     sonata.admin.block.stats   # block id
+              settings:
+                code:  admin.trash    # admin code - service id
+                icon:  fa-magic                  # font awesome icon
+                text:  Nombre de bennes
+                color: bg-success               # colors: bg-green, bg-red and bg-aqua
+                filters:                         # filter values
+                  edited: { value: 1 }
+    templates:
+        dashboard: 'admin/dashboard_custom.html.twig'
+        user_block: 'admin/user_block_custom.html.twig'
 sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts: [admin]
         sonata.admin.block.search_result:
             contexts: [admin]
+        sonata.admin.block.stats:
+            context: [admin]

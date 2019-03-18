@@ -40,7 +40,7 @@ class Incidents
      * @ORM\Column(type="string", length=255)
      */
     private $city;
-
+  
     /**
      * @ORM\Column(type="text")
      */
@@ -133,6 +133,18 @@ class Incidents
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

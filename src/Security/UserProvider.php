@@ -17,7 +17,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 final class UserProvider implements UserProviderInterface
 {
-
     /**
      * @var EntityManagerInterface
      */
