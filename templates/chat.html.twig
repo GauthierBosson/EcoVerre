@@ -7,7 +7,7 @@
             <div class="col-12">
                 <h3>Bienvenue</h3>
 
-                <div id="app-messages" style="height: 600px; overflow-y: scroll;">
+                <div id="app-messages" style="height: 600px; overflow-y: hidden;">
                     <div class="message" v-for="message in messages">
                         <div class="message-from">
                             <strong>
@@ -29,7 +29,7 @@
 
 
             <form class="input-group" id="app-form">
-                <input type="text" class="form-control" id="message-input" placeholder="Enter your messsage..." v-on:keyup="keyPress" autocomplete="off" />
+                <input type="text" class="form-control" id="message-input" placeholder="Entrez votre question..." v-on:keyup="keyPress" autocomplete="off" />
                 <div class="input-group-append">
                     <button id="message-send" class="btn btn-primary" disabled="disabled" v-on:click="send"><i class="fa fa-comment" title="Send"></i></button>
                 </div>
