@@ -2,48 +2,25 @@
 
 {% block stylesheets %}
 
-    <!-- <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <link rel="stylesheet" href="{{ asset('node_modules/leaflet/dist/leaflet.css') }}"/>
-    <script src="{{ asset('node_modules/leaflet/dist/leaflet.js') }}"></script> -->
-
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-
 {% endblock %}
 
 {% block title %}Hello OpenstreetmapController!{% endblock %}
 
+
+
+
 {% block body %}
 
+    <h1>Hello  ✅</h1>
 
-
-
-
+    Affichage de la carte :
 
     <div id="map"></div>
+    {% include "openstreetmap/openstreetmap.html.twig" %}
+
 
 
     {% block javascripts %}
-
-
-    <script>
-
-
-
-        window.onload = function () {
-            console.log('Page chargée ');
-
-            var map = L.map('map').setView([43.6005, 1.3472], 11);
-            var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                maxZoom: 18,
-                id: 'mapbox.streets',
-                accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
-            }).addTo(map);
-        }
-
-    </script>
-
 
     {% endblock %}
 

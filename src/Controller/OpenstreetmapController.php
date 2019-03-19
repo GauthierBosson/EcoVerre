@@ -9,6 +9,10 @@ use Symfony\Component\Config\FileLocator;
 
 class OpenstreetmapController extends AbstractController
 {
+
+
+    //carte pour utilisateur
+
     /**
      * @Route("/openstreetmap", name="openstreetmap")
      */
@@ -31,19 +35,47 @@ class OpenstreetmapController extends AbstractController
          // $jsonFiles = $fileLocator->locate('recup-verre.geojson', null, false);
 
 
-         $fp = file_get_contents('C:\xampp\htdocs\EcoVerre\src\Repository\json\recup-verre.geojson');
+         $fp = file_get_contents('json/recup.js');
+         $fp = json_decode($fp);
          dump($fp);
 
 
 
-        return $this->render('openstreetmap/index.html.twig', [
+        return $this->render('openstreetmap/openstreetmap.html.twig', [
             'controller_name' => 'OpenstreetmapController',
-            'json' => $fp
+            'verre' => $fp
         ]);
 
 
 
     }
+
+
+    /**
+     * @Route("/index", name="index")
+     */
+    public function map()
+    {
+        return $this->render('openstreetmap/index.html.twig', [
+            'controller_name' => 'OpenstreetmapController',
+        ]);
+
+    }
+
+
+    //carte referent et admin
+
+    /**
+     * @Route("/carte", name="carte")
+     */
+    public function carteRef()
+    {
+        return $this->render('openstreetmap/carte.html.twig', [
+            'controller_name' => 'OpenstreetmapController',
+        ]);
+
+    }
+
 
 
 }
