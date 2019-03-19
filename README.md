@@ -1,5 +1,9 @@
 # EcoVerre
 
+#### Prérequis :
+
+Yarn |  NodeJs | Composer | Version PHP 7.2 ou supérieur 
+
 Site de collecte de verre pour la ville de Toulouse
 
 Collaborateurs | Nom | Prénom | 
@@ -49,6 +53,7 @@ Collaborateurs | Nom | Prénom |
  
  # Installation du projet 
  
+ 
 
 
 ### 1ère étape : 
@@ -61,7 +66,7 @@ git clone https://github.com/GauthierBosson/EcoVerre.git
 
 Si vous n'avez pas composer sur votre pc : https://getcomposer.org/
 
-Sinon taper directement cette commande dans votre console 
+Sinon tapez directement cette commande dans votre console 
 
 ```bash
 composer install 
@@ -76,15 +81,10 @@ php bin/console server:run
 
 ### 4ème étape : 
 
-L'application est lancé, vous n'avez plus qu'a naviguer 
+L'application est lancée, vous n'avez plus qu'à naviguer 
 
 
 
-#### Prérecquis :
 
-Yarn 
-NodeJs
-Composer 
-Version PHP 7.2 ou supérieur 
 
 
