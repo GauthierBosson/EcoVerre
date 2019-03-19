@@ -4,6 +4,8 @@
 
 Yarn |  NodeJs | Composer | Version PHP 7.2 ou supérieur 
 
+## Description de l'application
+
 Site de collecte de verre pour la ville de Toulouse
 
 Collaborateurs | Nom | Prénom | 
