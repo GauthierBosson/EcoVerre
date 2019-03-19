@@ -85,6 +85,8 @@ class AdminTrashsAdmin extends AbstractAdmin
             ])
             ->add('address', null, ['label' => 'Adresse'])
             ->add('actualCapacity', null, ['label' => 'Capacité'])
+            ->add('availability', null, ['label' => 'Disponible ?'])
+            ->add('damage', null, ['label' => 'Dégradée ?'])
             ->end()
             ->end()
         ;
