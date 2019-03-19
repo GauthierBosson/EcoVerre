@@ -27,7 +27,6 @@
         "symfony/validator": "4.2.*",
         "symfony/web-link": "4.2.*",
         "symfony/webpack-encore-bundle": "^1.1",
-        "symfony/yaml": "4.2.*"
         "symfony/yaml": "4.2.*",
         "willdurand/geocoder-bundle": "^5.0"
     },

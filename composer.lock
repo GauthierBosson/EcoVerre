@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e85d1532fd9ae9b22017a17f13734fc6",
+    "content-hash": "554333fe4298f9575535012bade0a307",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -2294,16 +2294,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v3.17.0",
+            "version": "v3.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "5a2347ae5c75a6d95ce117a60ba986b2751ffe8c"
+                "reference": "cc27e4df11eaf0f485586dbe58b64b8e247b9856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/5a2347ae5c75a6d95ce117a60ba986b2751ffe8c",
-                "reference": "5a2347ae5c75a6d95ce117a60ba986b2751ffe8c",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/cc27e4df11eaf0f485586dbe58b64b8e247b9856",
+                "reference": "cc27e4df11eaf0f485586dbe58b64b8e247b9856",
                 "shasum": ""
             },
             "require": {
@@ -2352,7 +2352,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2019-01-23T21:12:53+00:00"
+            "time": "2019-03-18T20:57:45+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -6371,16 +6371,16 @@
         },
         {
             "name": "symfony/webpack-encore-bundle",
-            "version": "v1.1.0",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/webpack-encore-bundle.git",
-                "reference": "9c89795a4577c522101206a1a88272660735257c"
+                "reference": "e23e9d32abd7fb62b84ad0ff62b235b517c61bc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/webpack-encore-bundle/zipball/9c89795a4577c522101206a1a88272660735257c",
-                "reference": "9c89795a4577c522101206a1a88272660735257c",
+                "url": "https://api.github.com/repos/symfony/webpack-encore-bundle/zipball/e23e9d32abd7fb62b84ad0ff62b235b517c61bc4",
+                "reference": "e23e9d32abd7fb62b84ad0ff62b235b517c61bc4",
                 "shasum": ""
             },
             "require": {
@@ -6421,7 +6421,7 @@
                 }
             ],
             "description": "Integration with your Symfony app & Webpack Encore!",
-            "time": "2019-01-17T02:29:30+00:00"
+            "time": "2019-03-04T15:09:28+00:00"
         },
         {
             "name": "symfony/yaml",
