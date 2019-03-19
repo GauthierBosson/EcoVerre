@@ -1,10 +1,8 @@
-{% extends 'base.html.twig' %}
+
 
 {% block stylesheets %}
 
-    <!-- <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <link rel="stylesheet" href="{{ asset('node_modules/leaflet/dist/leaflet.css') }}"/>
-    <script src="{{ asset('node_modules/leaflet/dist/leaflet.js') }}"></script> -->
+
 
 
     <!--  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" /> -->
@@ -103,13 +101,13 @@
                 }
             });
             var marker = geojson.getLayers();
-
+            console.log('test');
             for ( var i = 0; i < marker.length; ++i )
             {
-                console.log(marker[i]);
+
                 if (marker[i].feature.properties.available == 1 && marker[i].feature.properties.damaged == 0 ){
                     var  myIcon = L.icon({
-                        iconUrl: "{{ asset('/img/garbage.png') }}"
+                        iconUrl: "{{ asset('img/garbage.png') }}"
                     });
                 }else if(marker[i].feature.properties.available == 1 && marker[i].feature.properties.damaged == 1) {
                     var  myIcon = L.icon({
@@ -121,6 +119,7 @@
                     });
                 }
              //   var marker = L.marker(latlng,{icon:myIcon});
+
 
 
                 // Detail du Popup
