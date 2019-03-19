@@ -4,7 +4,7 @@ Site de collecte de verre pour la ville de Toulouse
 
 Collaborateurs | Nom | Prénom | 
 ------------   | ------------- | ------------- | 
-1 | 	Dacosta   |  Théo
+1 | 	Da Costa   |  Théo
 2	| Lhermite   | Joffrey 
 3	| Bosson     | Gauthier
 4	| Allalah    | Clément 
@@ -47,3 +47,33 @@ Collaborateurs | Nom | Prénom |
 - [x] Un administrateur peut contacter un référent via la messagerie intern.
 
  
+ ## Installation du projet 
+ 
+ ## Installation
+
+# 1ère étape : 
+
+```bash
+git clone https://github.com/GauthierBosson/EcoVerre.git
+```
+
+# 2ème étape : 
+
+Si vous n'avez pas composer sur votre pc : https://getcomposer.org/
+
+Sinon taper directement cette commande dans votre console 
+
+```bash
+Composer install 
+```
+
+# 3ème étape : 
+
+
+```bash
+php bin/console server:run
+```
+
+# 4ème étape : 
+
+L'application est lancé, vous n'avez plus qu'a naviguer 
