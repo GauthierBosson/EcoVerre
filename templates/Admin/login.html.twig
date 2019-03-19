@@ -15,7 +15,7 @@
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ path('sonata_admin_dashboard') }}">
-                <span>Login</span>
+                <span>Connexion</span>
             </a>
         </div>
         <div class="login-box-body">
@@ -34,8 +34,8 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
-                <p class="login-box-msg">{{ 'Authentication'|trans }}</p>
-                <form action="{{ path("user_login") }}" method="post" role="form">
+                <p class="login-box-msg">{{ 'Authentification'|trans }}</p>
+                <form action="{{ path("admin_login") }}" method="post" role="form">
                     {{ form_row(form._token) }}
 
                     <div class="form-group has-feedback">
@@ -44,13 +44,13 @@
                     </div>
 
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" id="password" name="{{ form.password.vars.full_name }}" required="required" placeholder="Password"/>
+                        <input type="password" class="form-control" id="password" name="{{ form.password.vars.full_name }}" required="required" placeholder="Mot de passe"/>
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
                         </div>
                     </div>
                 </form>
