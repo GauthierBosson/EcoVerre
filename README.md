@@ -64,7 +64,7 @@ Si vous n'avez pas composer sur votre pc : https://getcomposer.org/
 Sinon taper directement cette commande dans votre console 
 
 ```bash
-Composer install 
+composer install 
 ```
 
 ### 3ème étape : 
@@ -77,3 +77,14 @@ php bin/console server:run
 ### 4ème étape : 
 
 L'application est lancé, vous n'avez plus qu'a naviguer 
+
+
+
+#### Prérecquis :
+
+Yarn 
+NodeJs
+Composer 
+Version PHP 7.2 ou supérieur 
+
+
