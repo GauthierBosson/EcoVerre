@@ -1,5 +1,5 @@
 
-{% extends app.session.get('check') == 1 ? base_template : 'admin/uncheck.html.twig' %}
+{% extends app.session.get('check') == 1  ? base_template : 'admin/uncheck.html.twig' %}
 
 
     {% block title %}{{ 'title_dashboard'|trans({}, 'SonataAdminBundle') }}{% endblock%}
