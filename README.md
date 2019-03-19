@@ -2,12 +2,13 @@
 
 Site de collecte de verre pour la ville de Toulouse
 
-Collaborateurs	Nom	Prénom
-1	Dacosta Théo
-2	Lhermite Joffrey 
-3	Bosson Gauthier
-4	Allalah Clément 
-5	Follin	Emilie
+Collaborateurs | Nom | Prénom | 
+------------   | ------------- | ------------- | 
+1 | 	Dacosta   |  Théo
+2	| Lhermite   | Joffrey 
+3	| Bosson     | Gauthier
+4	| Allalah    | Clément 
+5 | 	Follin    |	Emilie
 
 
 Cahier des charges
