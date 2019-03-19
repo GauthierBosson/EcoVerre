@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Users|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,12 @@ class UsersRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+
+
+
+
+
+
 }
