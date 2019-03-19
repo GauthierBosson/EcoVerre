@@ -47,17 +47,17 @@ Collaborateurs | Nom | Prénom |
 - [x] Un administrateur peut contacter un référent via la messagerie intern.
 
  
- ## Installation du projet 
+ # Installation du projet 
  
- ## Installation
 
-# 1ère étape : 
+
+### 1ère étape : 
 
 ```bash
 git clone https://github.com/GauthierBosson/EcoVerre.git
 ```
 
-# 2ème étape : 
+### 2ème étape : 
 
 Si vous n'avez pas composer sur votre pc : https://getcomposer.org/
 
@@ -67,13 +67,13 @@ Sinon taper directement cette commande dans votre console
 Composer install 
 ```
 
-# 3ème étape : 
+### 3ème étape : 
 
 
 ```bash
 php bin/console server:run
 ```
 
-# 4ème étape : 
+### 4ème étape : 
 
 L'application est lancé, vous n'avez plus qu'a naviguer 
