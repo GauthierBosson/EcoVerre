@@ -3,6 +3,21 @@ sonata_admin:
     title: 'Green World'
     title_logo: /bundles/sonataadmin/LOGO1.png
     dashboard:
+        groups:
+            Users:
+              items:
+                - admin.users
+              roles: ['ROLE_ADMIN']
+            Message:
+              items:
+                - admin.message
+                - admin.send.message
+              roles: ['ROLE_ADMIN','ROLE_USER']
+            Gestion des bennes:
+              items:
+                - admin.trash
+                - admin.incident
+              roles: ['ROLE_ADMIN','ROLE_USER']
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
             -
@@ -11,18 +26,19 @@ sonata_admin:
               type:     sonata.admin.block.stats   # block id
               settings:
                   code:  admin.users    # admin code - service id
-                  icon:  fa-magic                  # font awesome icon
+                  icon:  fa-user                 # font awesome icon
                   text:  Nombre d'utilisateurs
                   color: bg-yellow                 # colors: bg-green, bg-red and bg-aqua
                   filters:                         # filter values
                       edited: { value: 1 }
+              roles: ['ROLE_ADMIN']
             -
               class:    col-lg-3 col-xs-6          # twitter bootstrap responsive code
               position: top                        # zone in the dashboard
               type:     sonata.admin.block.stats   # block id
               settings:
                   code:  admin.message    # admin code - service id
-                  icon:  fa-magic                  # font awesome icon
+                  icon:  fa-envelope                  # font awesome icon
                   text:  Nombre de messages
                   color: bg-primary                # colors: bg-green, bg-red and bg-aqua
                   filters:                         # filter values
@@ -33,11 +49,22 @@ sonata_admin:
               type:     sonata.admin.block.stats   # block id
               settings:
                 code:  admin.trash    # admin code - service id
-                icon:  fa-magic                  # font awesome icon
+                icon:  fa-trash                  # font awesome icon
                 text:  Nombre de bennes
                 color: bg-success               # colors: bg-green, bg-red and bg-aqua
                 filters:                         # filter values
                   edited: { value: 1 }
+            -
+              class: col-lg-3 col-xs-6
+              position: top
+              type: sonata.admin.block.stats
+              settings:
+                code: admin.incident
+                icon: fa-times
+                text: Nombre d'incidents
+                color: bg-danger
+                filters:
+                    edited: { value: 1}
 
     templates:
         dashboard: 'admin/dashboard_custom.html.twig'

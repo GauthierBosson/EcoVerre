@@ -10,7 +10,8 @@
                 <i class="fa fa-shield" ></i>Activer la double authentification
             </a>
         </li>
-    {% else %}
+    {% endif %}
+    {% if app.user.isGoogleAuthenticatorEnabled and is_granted('ROLE_USER')%}
         <li>
             <a href="{{ path('user_disable_tfa') }}">
                 <i class="fa fa-shield" ></i>Désactiver la double authentification
