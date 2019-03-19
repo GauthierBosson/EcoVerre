@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+        <div class="container">
+            <img class="header" src="{{ asset('img/LOGO1.png') }}">
+        </div>
+    </nav>
+
+    <!-- Affichage carte -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <h3>COLLECTE DU VERRE</h3>
+                <p>En partenariat avec Eco-Emballages, Toulouse Métropole accélère son programme d'installation de récup'verre.</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Affichage carte -->
+    <div class="container">
+
+        {% include "openstreetmap/index.html.twig" %}
+
+    </div>
+
+
+
+    <!-- Description -->
+    <section class="description">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="description-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <h5>Trouver la borne la plus proche de chez vous à Toulouse</h5>
+                        <p>La collecte du verre s'effectue en apport volontaire. Il appartient à chacun de déposer bouteilles
+                            et bocaux dans les conteneurs verts, installés dans de nombreux endroits de la ville</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="description-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <h5>Que déposer dans la borne à verre ?</h5>
+                        <p> Les bouteilles, pots, bocaux sans capsule, ni bouchon. </p>
+                        <img class="verre" src="{{ asset('img/verre.png')}}">
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="description-item mx-auto mb-0 mb-lg-3">
+                        <h5>Le circuit du verre : destination Albi</h5>
+                        <img class="circuit" src="{{ asset('img/circuit.jpg')}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Call to Action -->
+    <section class="contact text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <h2 class="mb-4">Contactez nous ? </h2>
+                </div>
+                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+
+
+                    <form action="" method="">
+
+                        <input class="form-control" type="text" name="nom" placeholder="name"/>
+                        <input class="form-control" type="text" name="prenom" placeholder="prenom" />
+                        <input class="form-control" type="text" name="email" placeholder="email" />
+                        <textarea class="form-control" placeholder="exemple"></textarea>
+                        <input class="btn btn-primary" type="submit" value="OK">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="#">About</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Contact</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2019. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+
+
+
+    window.onload = function () {
+        console.log('Page chargée ');
+
+        var map = L.map('map').setView([43.6005, 1.3472], 11);
+        var titleStreets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiMTY5NTciLCJhIjoiY2pzcHhodDB5MHF4YjQzbzA3dHByb3V2ZiJ9.CiBSDPowlgXwoiRjIlhTKg'
+        }).addTo(map);
+    }
+
+    </script>
+
+
+
+{% endblock %}

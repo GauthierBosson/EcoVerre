@@ -1,5 +1,151 @@
+
+/*!
+ * Start Bootstrap - Landing Page v5.0.3 (https://startbootstrap.com/template-overviews/landing-page)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-landing-page/blob/master/LICENSE)
+ */
+
 body {
-    background-color: lightgray;
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.header {
+    width: 10% !important;
+}
+
+.header img {
+    width: 15%;
+}
+
+.navbar {
+    margin-bottom: 1rem;
+}
+
+
+#map {
+    height: 500px;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+}
+
+h2{
+    color: #a59e9e;;
+}
+
+h3,
+h5 {
+    color: #39b577;
+}
+
+a {
+    color: #39b577 !important;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #39b577 !important;
+    border-color: #39b577 !important;
+}
+
+
+
+header.masthead .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+@media (min-width: 768px) {
+    header.masthead {
+        padding-top: 12rem;
+        padding-bottom: 12rem;
+    }
+    header.masthead h1 {
+        font-size: 3rem;
+    }
+}
+
+.showcase .showcase-text {
+    padding: 3rem;
+}
+
+.showcase .showcase-img {
+    min-height: 30rem;
+    background-size: cover;
+}
+
+@media (min-width: 768px) {
+    .showcase .showcase-text {
+        padding: 7rem;
+    }
+}
+
+.description {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.description .description-item {
+    max-width: 20rem;
+}
+
+.description-item-icons {
+    height: 7rem;
+}
+
+
+.verre {
+    width: 80%;
+}
+
+.circuit {
+    width: 100%;
+}
+
+
+
+.contact {
+    position: relative;
+    background-color: #bdbebf;
+    background-image: url("/img/verref3.png");
+    background-size: cover;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.contact .overlay {
+    position: absolute;
+    background-color: #bdbebf;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+footer.footer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+
+.btn-primary {
+    background-color: #07644f !important;
 }
 
 /* required styles */
