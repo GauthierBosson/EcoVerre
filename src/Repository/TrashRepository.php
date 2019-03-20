@@ -9,6 +9,8 @@
 namespace App\Repository;
 
 
+use App\Entity\Trashs;
+
 class TrashRepository
 {
     public function customHeader(){
@@ -103,5 +105,4 @@ class TrashRepository
         }
 
     }
-
 }
