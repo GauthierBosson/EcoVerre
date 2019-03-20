@@ -46,6 +46,41 @@
             width: 20%;
         }
 
+        #directions {
+            position: absolute;
+            width: 33.3333%;
+            max-width: 300px;
+            min-width: 200px;
+        }
+
+        #inputs {
+            z-index: 99;
+            top: 8px;
+            right: 21px;
+            /* left: 10px; */
+            position: absolute;
+        }
+
+        #directions {
+            z-index: 99;
+            background: rgba(0, 0, 0, .8);
+            top: 124px;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+            height: 284px;
+        }
+
+        #errors {
+            z-index: 8;
+            opacity: 0;
+            padding: 10px;
+            border-radius: 0 0 3px 3px;
+            background: rgba(0, 0, 0, .25);
+            top: 90px;
+            left: 10px;
+        }
+
 
 
 
@@ -74,9 +109,25 @@
             // move the attribution control out of the way
             map.attributionControl.setPosition('bottomright');
 
+            var directions = L.mapbox.directions();
+
+            var directionsLayer = L.mapbox.directions.layer(directions)
+                .addTo(map);
+
+            var directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
+                .addTo(map);
+
+
+            var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
+                .addTo(map);
+
+            var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
+                .addTo(map);
 
 
             var pane = map.createPane('fixed', document.getElementById('map'));
+
+
 
             // ajout de l'image : logo sur le marker
             //  var icon = L.icon({
@@ -133,7 +184,8 @@
                         + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
                         + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + marker[i].feature.properties.adresse + ','
                         + marker[i].feature.properties.zip + ',' + marker[i].feature.properties.commune + '/@' + marker[i].feature.geometry.coordinates[1] + ',' + marker[i].feature.geometry.coordinates[0] + ' "> <br>'
-                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>')
+                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>'
+                        + '<a href="/trash/add_incidents/'+marker[i].feature.properties.id+'">Déclarer un incident</a>')
                     ;
 
                 }else{
@@ -146,7 +198,8 @@
                         + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
                         + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + marker[i].feature.properties.adresse + ','
                         + marker[i].feature.properties.zip  + ',' + marker[i].feature.properties.commune + '/@' + marker[i].feature.geometry.coordinates[1] + ',' + marker[i].feature.geometry.coordinates[0] + '"> <br>'
-                        + '<b>Capacité : La poubelle</b>' + '<br>')
+                        + '<b>Capacité : La poubelle</b>' + '<br>'
+                        + '<a href="/trash/add_incidents/'+marker[i].feature.properties.id+'">Déclarer un incident</a>')
                     ;
                 }
                 console.log(marker[i]);
@@ -191,6 +244,13 @@
             <div class="col-xl-9 mx-auto">
                 <div id="map" style="height: 400px"></div>
             </div>
+        </div>
+    </div>
+    <div id='inputs'></div>
+    <div id="calcul">
+        <div id='directions'>
+            <div id='routes'></div>
+            <div id='instructions'></div>
         </div>
     </div>
 
