@@ -1,0 +1,22 @@
+menu:
+  titre: Ciao e benvenuto!
+
+carte:
+  titre: COLLEZIONE DI VETRO
+  partenaire: In collaborazione con Eco-Emballages, Toulouse Métropole sta accelerando il suo programma di installazione di riciclaggio.
+
+description:
+  titre: Trova il terminal più vicino a casa tua a Tolosa
+  collecte: La raccolta del vetro è volontaria. Spetta a tutti depositare bottiglie e barattoli in contenitori verdi, installati in molte parti della città.
+  titre2: Cosa depositare nel terminale di vetro?
+  deposer: Bottiglie, barattoli, vasi senza capsula o cappuccio.
+  circuit: Il circuito di vetro destinazione Albi
+
+contact:
+  contact: Contattaci?
+
+footer:
+  link1: Informazioni
+  link2: Contatto
+  link3: Condizioni d'uso
+  link4: Informativa sulla privacy
