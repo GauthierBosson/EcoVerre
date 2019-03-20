@@ -7,6 +7,7 @@
     },
     "botman/driver-web": {
         "version": "1.5.1"
+    },
     "cocur/slugify": {
         "version": "v3.2"
     },
@@ -142,6 +143,7 @@
     },
     "opis/closure": {
         "version": "3.1.6"
+    },
     "php-http/promise": {
         "version": "v1.0.0"
     },
@@ -189,6 +191,7 @@
     },
     "react/stream": {
         "version": "v1.1.0"
+    },
     "scheb/two-factor-bundle": {
         "version": "3.16",
         "recipe": {
@@ -214,8 +217,6 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "spatie/macroable": {
-        "version": "1.0.0"
     "sonata-project/admin-bundle": {
         "version": "3.31",
         "recipe": {
@@ -262,6 +263,9 @@
     },
     "sonata-project/google-authenticator": {
         "version": "2.2.0"
+    },
+    "spatie/macroable": {
+        "version": "1.0.0"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
@@ -627,6 +631,7 @@
     },
     "tightenco/collect": {
         "version": "v5.8.2"
+    },
     "twig/extensions": {
         "version": "1.0",
         "recipe": {
