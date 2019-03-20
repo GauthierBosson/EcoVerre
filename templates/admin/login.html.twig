@@ -39,6 +39,11 @@
                     {{ form_row(form._token) }}
 
                     <div class="form-group has-feedback">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                         <input type="text" class="form-control" id="username" name="{{ form.email.vars.full_name }}" value="{{ last_username }}" required="required" placeholder="Email"/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
