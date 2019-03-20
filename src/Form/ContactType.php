@@ -20,7 +20,8 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('admin',CheckboxType::class,[
-                'required'=>false
+                'required'=>false,
+                'label'=>'Administrateur'
 
             ])
             ->add('referent',CheckboxType::class,[
