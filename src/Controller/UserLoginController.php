@@ -175,7 +175,7 @@ final class UserLoginController extends Controller
         $em->flush();
 
         $this->addFlash('success', 'Double authentification supprimée avec succès');
-        return $this->redirectToRoute('sonata_admin_dashboard', );
+        return $this->redirectToRoute('sonata_admin_dashboard');
     }
 
     /**
