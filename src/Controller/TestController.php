@@ -30,18 +30,18 @@ class TestController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $admin = new Users();
-        $admin->setName('Theo');
-        $admin->setFirstname('Dacosta');
-        $admin->setEmail('Roro@gmail.com');
-        $admin->setPassword($passwordEncoder->encodePassword($admin,'123456'));
+        $admin->setName('test');
+        $admin->setFirstname('test');
+        $admin->setEmail('user@toulouse.com');
+        $admin->setPassword($passwordEncoder->encodePassword($admin,'root'));
         $admin->setRoles('ROLE_USER');
-        $admin->setCity('Rouen');
+        $admin->setCity('Toulouse');
         $admin->setDateCreation(new \DateTime('now'));
 
 
         $entityManager->persist($admin);
         $entityManager->flush();
 
-        return new Response('admin ajouté');
+        return new Response('user ajouté');
     }
 }

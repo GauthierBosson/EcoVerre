@@ -65,7 +65,7 @@ final class UserLoginController extends Controller
     /**
      * @param GoogleAuthenticatorInterface $googleAuthenticator
      * @return Response
-     * @Route("user/googleSecret", name="generate_user_google_secret")
+     * @Route("admin/googleSecret", name="generate_user_google_secret")
      */
     public function googleSecret(GoogleAuthenticatorInterface $googleAuthenticator, Request $request)
     {
@@ -74,7 +74,6 @@ final class UserLoginController extends Controller
         $session = new Session();
         $sessionArr = $session->all();
         $em = $this->getDoctrine()->getManager();
-        dump($sessionArr);
 
         if ($userAuthState === true) {
             return new Response('Double authentification déjà activée');
@@ -100,8 +99,12 @@ final class UserLoginController extends Controller
                         $em->flush();
                         $session->clear();
 
-                        return new RedirectResponse($this->router->generate('user_logout'));
+                        $this->addFlash('success', 'Double authentifiation activée avec succès. Veuillez vous reconnecter');
+
+                        return new RedirectResponse($this->router->generate('admin_logout'));
                     }
+
+                    $this->addFlash('error', 'Le code est invalide');
                 }
 
                 return $this->render('user/qrcode_view.html.twig', [
@@ -123,8 +126,12 @@ final class UserLoginController extends Controller
                         $em->flush();
                         $session->clear();
 
-                        return new RedirectResponse($this->router->generate('user_logout'));
+                        $this->addFlash('success', 'Double authentifiation activée avec succès. Veuillez vous reconnecter');
+
+                        return new RedirectResponse($this->router->generate('admin_logout'));
                     }
+
+                    $this->addFlash('error', 'Le code est invalide');
                 }
 
                 return $this->render('user/qrcode_view.html.twig', [
@@ -157,7 +164,7 @@ final class UserLoginController extends Controller
     }
 
     /**
-     * @Route("user/disabletfa", name="user_disable_tfa")
+     * @Route("admin/disabletfa", name="user_disable_tfa")
      */
     public function disableGoogleAuth()
     {
@@ -167,7 +174,8 @@ final class UserLoginController extends Controller
         $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('sonata_admin_dashboard');
+        $this->addFlash('success', 'Double authentification supprimée avec succès');
+        return $this->redirectToRoute('sonata_admin_dashboard', );
     }
 
     /**
