@@ -51,9 +51,16 @@ class TestController extends AbstractController
             $lng =  $file[0]['features'][$i]['geometry']['coordinates'][0];
             $lat =  $file[0]['features'][$i]['geometry']['coordinates'][1];
             $altitude =  rand(0,100);
+            $commune = rawurlencode($commune);
+            $zip = file_get_contents("https://geo.api.gouv.fr/communes?nom=$commune");
+            $zip = json_decode($zip,true);
+            if ($zip != null){
+            $codeP = $zip[0]['codesPostaux'][0];
+            }
             $actualCapacity =  $file[0]['features'][$i]['properties']['actualCapacity'] ;
             $available =$file[0]['features'][$i]['properties']['available'] ;
             $damage = $file[0]['features'][$i]['properties']['damaged']  ;
+            $commune = rawurldecode($commune);
 
             //array_push($file[0]['features'][$i]['geometry']['coordinates'],$gps);
             $entityManager = $this->getDoctrine()->getManager();
@@ -70,6 +77,9 @@ class TestController extends AbstractController
             $trash->setCapacityMax($maxCapacity);
             $trash->setAvailability($available);
             $trash->setDamage($damage);
+
+            $trash->setZip($codeP);
+
             $entityManager->persist($trash);
             $entityManager->flush();
 
