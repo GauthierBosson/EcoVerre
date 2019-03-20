@@ -21,17 +21,28 @@ class ContactType extends AbstractType
         $builder
             ->add('admin',CheckboxType::class,[
                 'required'=>false
+
             ])
             ->add('referent',CheckboxType::class,[
-                'required'=>false
+                'required'=>false,
+                'label'=>'Référent'
             ])
-            ->add('email',EmailType::class)
-            ->add('objet', TextType::class)
-            ->add('message',TextareaType::class)
+            ->add('email',EmailType::class,[
+                'attr'=>['class'=>'form-control','placeholder'=>'Votre email'],
+
+            ])
+            ->add('objet', TextType::class,[
+                'attr'=>['class'=>'form-control','placeholder'=>'Objet du message']
+                ]
+                )
+            ->add('message',TextareaType::class,[
+                'attr'=>['class'=>'form-control']
+            ])
             ->add('ville',EntityType::class,[
                 'class'=>Users::class,
                 'choice_label'=>'city',
                 'required'=>false,
+                'attr'=>['class'=>'form-control'],
                 'query_builder' => function(EntityRepository $er) {
 
                     return $er->createQueryBuilder('user')
