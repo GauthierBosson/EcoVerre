@@ -10,6 +10,7 @@ namespace App\Admin;
 
 
 use App\Entity\Trashs;
+use App\Repository\TrashRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -150,4 +151,13 @@ class AdminTrashsAdmin extends AbstractAdmin
         $object->setAltitude($elevation);
         $object->setinseeCode($code);
     }
+    public function postPersist($object)
+    {
+        parent::postPersist($object); //
+        $repo = new TrashRepository();
+        $repo->addJsonObject($object->getCity(),$object->getAddress(),$object->getCapacityMax(),$object->getActualCapacity(),$object->getAvailability(),$object->getDamage(),$object->getZip());
+
+
+    }
+
 }

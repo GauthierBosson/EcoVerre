@@ -17,18 +17,18 @@ class TrashRepository
         return $context;
     }
 
-    public function getCoordinates(){
+    public function getCoordinates($address,$zip){
         $context = $this->customHeader();
-        $address = rawurlencode($_POST['address']); // changer en resultat de formulaire
-        $zip = rawurlencode($_POST['zip']); // changer en resultat de formulaire
+        $address = rawurlencode($address); // changer en resultat de formulaire
+        $zip = rawurlencode($zip); // changer en resultat de formulaire
         $url = "https://nominatim.openstreetmap.org/search/$address,%20$zip?format=json&limit=1";
         $gps= file_get_contents($url,false,$context);
         $gps= json_decode($gps,true);
         return $gps;
     }
 
-    public function getCommuneInfo(){
-        $communeName = $_POST['commune']; // changer en resultat de formulaire
+    public function getCommuneInfo( $communeName){
+       // $communeName = $_POST['commune']; // changer en resultat de formulaire
 
         $commune = 'https://geo.api.gouv.fr/communes?nom='.$communeName;
         $commune = file_get_contents($commune);
@@ -36,34 +36,34 @@ class TrashRepository
         return $commune;
     }
 
-    public function generateIdTrash(){
-        $communeName = $_POST['commune']; // changer en resultat de formulaire
+    public function generateIdTrash( $communeName){
+       // $communeName = $_POST['commune']; // changer en resultat de formulaire
 
         $idTrash = substr($communeName, 0 ,3). 'VE' . rand(100,999);
         $idTrash = strtoupper($idTrash);
         return $idTrash;
     }
-    public function getCommuneCode(){
-        $commune = $this->getCommuneInfo();
+    public function getCommuneCode( $communeName){
+        $commune = $this->getCommuneInfo( $communeName);
         $code_com = $commune[0]['code'];
         return $code_com;
     }
-    public function generateTrashJson(){
-        $gps = $this->getCoordinates();
+    public function generateTrashJson($communeName,$address,$zip,$maxCapacity,$actualCapacity,$available,$damaged ){
+        $gps = $this->getCoordinates($address,$zip);
         $lat = $gps[0]['lat'];
         $lon = $gps[0]['lon'];
-        $communeName = $_POST['commune']; // changer en resultat de formulaire
-        $address = $_POST['address']; // changer en resultat de formulaire
-        $idTrash = $this->generateIdTrash();
-        $code_com = $this->getCommuneCode();
+        //$communeName = $_POST['commune']; // changer en resultat de formulaire
+       // $address = $_POST['address']; // changer en resultat de formulaire
+        $idTrash = $this->generateIdTrash($communeName);
+        $code_com = $this->getCommuneCode( $communeName);
 
 
-        $json ='}},{"type":"Feature","geometry":{"type":"Point","coordinates":['.$lon.','.$lat.']},"properties":{"commune":"'.$communeName.'","adresse":"'.$address.'","code_com":'.$code_com.',"geo_point_2d":['.$lat.','.$lon.'],"dmt_type":"Verre","id":"'.$idTrash.'"}}]';
+        $json ='}},{"type":"Feature","geometry":{"type":"Point","coordinates":['.$lon.','.$lat.']},"properties":{"commune":"'.$communeName.'","adresse":"'.$address.'","code_com":'.$code_com.',"geo_point_2d":['.$lat.','.$lon.'],"dmt_type":"Verre","id":"'.$idTrash.'","maxCapacity":'.$maxCapacity.',"actualCapacity":'.$actualCapacity.',"available":'.$available.',"damaged":'.$damaged.',"zip":"'.$zip.'"}}]';
         return $json;
     }
-    public function addJsonObject(){
-        $json = $this->generateTrashJson();
-        $po = file_get_contents('recup.js');
+    public function addJsonObject($communeName,$address,$zip,$maxCapacity,$actualCapacity,$available,$damaged){
+        $json = $this->generateTrashJson($communeName,$address,$zip,$maxCapacity,$actualCapacity,$available,$damaged);
+        $po = file_get_contents('json/recup.js');
 
         $to = strpos($po,'}}');
         $trans = array("}}]" => $json);
@@ -71,8 +71,8 @@ class TrashRepository
 
         $po = substr($lo , 12);
         $envoi = 'var Verre = '. $po;
-        $file = fopen('recup.js','a');
-        file_put_contents('recup.js',$envoi);
+        $file = fopen('json/recup.js','a');
+        file_put_contents('json/recup.js',$envoi);
     }
     public function addElevationJson(){
         if (isset($_POST['reset'])){
@@ -101,6 +101,7 @@ class TrashRepository
             print_r($file);
             file_put_contents('json/recup.js',$file);
         }
+
     }
 
 }

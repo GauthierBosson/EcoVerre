@@ -70,6 +70,26 @@ class Trashs
      * @ORM\Column(type="boolean",nullable=true)
      */
     private $damage;
+    /**
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $zip;
+
+    /**
+     * @return mixed
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * @param mixed $zip
+     */
+    public function setZip($zip): void
+    {
+        $this->zip = $zip;
+    }
 
     /**
      * @return mixed
