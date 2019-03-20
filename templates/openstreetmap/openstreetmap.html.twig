@@ -184,7 +184,8 @@
                         + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
                         + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + marker[i].feature.properties.adresse + ','
                         + marker[i].feature.properties.zip + ',' + marker[i].feature.properties.commune + '/@' + marker[i].feature.geometry.coordinates[1] + ',' + marker[i].feature.geometry.coordinates[0] + ' "> <br>'
-                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>')
+                        + '<b>Capacité : La poubelle est presque pleine</b>' + '<br>'
+                        + '<a href="/trash/add_incidents/'+marker[i].feature.properties.id+'">Déclarer un incident</a>')
                     ;
 
                 }else{
@@ -197,7 +198,8 @@
                         + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
                         + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + marker[i].feature.properties.adresse + ','
                         + marker[i].feature.properties.zip  + ',' + marker[i].feature.properties.commune + '/@' + marker[i].feature.geometry.coordinates[1] + ',' + marker[i].feature.geometry.coordinates[0] + '"> <br>'
-                        + '<b>Capacité : La poubelle</b>' + '<br>')
+                        + '<b>Capacité : La poubelle</b>' + '<br>'
+                        + '<a href="/trash/add_incidents/'+marker[i].feature.properties.id+'">Déclarer un incident</a>')
                     ;
                 }
                 console.log(marker[i]);
