@@ -43,6 +43,9 @@ class AdminTrashsAdmin extends AbstractAdmin
         $formMapper->add('address', TextType::class, [
             'label' => 'Adresse'
         ]);
+        $formMapper->add('zip', TextType::class, [
+            'label' => 'Code postal'
+        ]);
         $formMapper->add('reference', TextType::class, [
             'label' => 'Référence'
         ]);
@@ -155,7 +158,7 @@ class AdminTrashsAdmin extends AbstractAdmin
     {
         parent::postPersist($object); //
         $repo = new TrashRepository();
-        $repo->addJsonObject($object->getCity(),$object->getAddress(),$object->getCapacityMax(),$object->getActualCapacity(),$object->getAvailability(),$object->getDamage(),$object->getZip());
+        $repo->addJsonObject($object->getCity(),$object->getAddress(),$object->getZip(),$object->getCapacityMax(),$object->getActualCapacity(),$object->getAvailability(),$object->getDamage());
 
 
     }
