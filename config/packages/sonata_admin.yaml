@@ -4,11 +4,11 @@ sonata_admin:
     title_logo: /bundles/sonataadmin/LOGO1.png
     dashboard:
         groups:
-            Users:
+            Utilisateurs:
               items:
                 - admin.users
               roles: ['ROLE_ADMIN']
-            Message:
+            Messages:
               items:
                 - admin.message
                 - admin.send.message

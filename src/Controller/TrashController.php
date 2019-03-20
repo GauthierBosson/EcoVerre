@@ -57,6 +57,7 @@ class TrashController extends AbstractController
             $incident->setDescription($data['description']);
             $incident->setDate(new \DateTime('now'));
             $incident->setReference(substr($cityTrash, 0, 3 ) . 'ver' . bin2hex($ref));
+            $incident->setCity($cityTrash);
             $incident->setTrash($idTransform);
 
             $em = $this->getDoctrine()->getManager();
