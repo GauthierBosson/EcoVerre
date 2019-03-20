@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
     <style>
@@ -91,14 +91,31 @@
                 <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 
 
-                    <form action="" method="">
+                    {{ form_start(form) }}
+                    {{ form_row(form.admin) }}
 
-                        <input class="form-control" type="text" name="nom" placeholder="name"/>
-                        <input class="form-control" type="text" name="prenom" placeholder="prenom" />
-                        <input class="form-control" type="text" name="email" placeholder="email" />
-                        <textarea class="form-control" placeholder="exemple"></textarea>
-                        <input class="btn btn-primary" type="submit" value="OK">
-                    </form>
+                    {{ form_row(form.referent) }}
+                    <div id="test">
+
+                    </div>
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.objet) }}
+                    {{ form_row(form.message) }}
+
+
+
+                    <input type="submit" value="Envoyer" id="send" class="btn btn-lg bg-success mt-2">
+
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('success2') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
 
                 </div>
             </div>
@@ -140,7 +157,46 @@
 
 {% block javascripts %}
 
+    <script>
+        $('#contact_referent').click(function(){
+            cochee = $(this).is(':checked');
 
+
+            if (cochee === true) {
+                $(function(){
+                    $.ajax({
+
+                        cache: false,
+                        success: function() {
+                            $("#test").append('{{ form_row(form.ville) }}');
+
+                        },
+                        error: function(XMLHttpRequest,textStatus, errorThrown){
+                            alert(textStatus);
+                        },
+                    });
+                    return false;
+                });
+            }
+
+            else {
+                $(function(){
+                    $("#test").empty();
+
+                    return false;
+                });
+            }
+
+        });
+
+
+
+
+
+
+
+
+    </script>
 
 
 {% endblock %}
