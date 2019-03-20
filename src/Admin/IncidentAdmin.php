@@ -60,10 +60,17 @@ class IncidentAdmin extends AbstractAdmin
             'label' => 'Email',
             'data' => $user->getEmail()
         ]);
-        $formMapper->add('city', HiddenType::class, [
-            'label' => 'Ville',
-            'data' => $user->getCity()
-        ]);
+        if($user->getCity() != null){
+            $formMapper->add('city', HiddenType::class, [
+                'label' => 'Ville',
+                'data' => $user->getCity()
+            ]);
+        } else {
+            $formMapper->add('city',TextType::class,[
+                'label'=>'Ville'
+            ]);
+        }
+
         $formMapper->add('reference', HiddenType::class, [
             'label' => 'Référence',
             'data' => substr($user->getCity(), 0, 3 ) . 'ver' . bin2hex($ref)

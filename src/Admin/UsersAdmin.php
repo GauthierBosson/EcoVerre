@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -64,10 +65,32 @@ final class UsersAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name',null,['label'=>'Nom']);
+        $listMapper->addIdentifier('name', null, [
+            'route' => [
+                'name' => 'show'
+            ],
+            'label'=>'Nom'
+        ]);
         $listMapper->add('firstname',null,['label'=>'Prénom']);
         $listMapper->add('email');
         $listMapper->add('city',null,['label'=>'Ville']);
+    }
+
+    public function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->with('Référent : ' . $showMapper->getAdmin()->getSubject()->getEmail(), [
+                'class'       => 'col-md-12',
+                'box_class'   => 'box box-solid box-warning',
+                'description' => 'Votre benne',
+            ])
+            ->add('email', null, ['label' => 'Email'])
+            ->add('name', null, ['label' => 'Nom'])
+            ->add('firstname', null, ['label' => 'Prénom'])
+            ->add('city', null, ['label' => 'Ville'])
+            ->end()
+            ->end()
+        ;
     }
     
 
