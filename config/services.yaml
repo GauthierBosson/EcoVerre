@@ -9,6 +9,26 @@ parameters:
     app_locales: en|fr|de|es|kh|gr|it
 
 services:
+    admin.trash:
+        class: App\Admin\AdminTrashsAdmin
+        arguments: [~, App\Entity\Trashs, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, group: Gestion des bennes, label: Bennes }
+    admin.incident:
+        class: App\Admin\IncidentAdmin
+        arguments: [~, App\Entity\Incidents, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, group: Gestion des bennes, label: Incidents }
+    admin.message:
+        class: App\Admin\MessageReferentAdmin
+        arguments: [~, App\Entity\Message, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, group: Messages, label: Messages reçus }
+    admin.send.message:
+        class: App\Admin\SendMessageReferentAdmin
+        arguments: [~, App\Entity\Message, ~]
+        tags:
+        - { name: sonata.admin, manager_type: orm, group: Messages, label: Messages envoyés }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -28,3 +48,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    admin.users:
+        class: App\Admin\UsersAdmin
+        arguments: [~,App\Entity\Users,~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Utilisateurs ,label: Utilisateurs}
