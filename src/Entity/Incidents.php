@@ -37,6 +37,11 @@ class Incidents
     private $reference;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $city;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -116,7 +121,7 @@ class Incidents
         return $this;
     }
 
-    /*public function getCity(): ?string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -126,7 +131,7 @@ class Incidents
         $this->city = $city;
 
         return $this;
-    }*/
+    }
 
     public function getDescription(): ?string
     {
