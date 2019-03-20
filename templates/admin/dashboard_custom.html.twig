@@ -108,6 +108,11 @@
             {% if has_bottom %}
                 <div class="row">
                     {% for block in blocks.bottom %}
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                         {% if block.roles|length == 0 or is_granted_affirmative(block.roles) %}
                             <div class="{{ block.class }}">
                                 {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}

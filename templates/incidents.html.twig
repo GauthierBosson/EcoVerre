@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un incident{% endblock %}
+{% block body %}
+
+    <style>
+        .form-incident{
+            background-color: #f8f9f9;
+            -webkit-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.37);
+            -moz-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.37);
+            box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.37);
+            height: 380px;
+            border-radius: 10px 10px 10px 10px;
+            -moz-border-radius: 10px 10px 10px 10px;
+            -webkit-border-radius: 10px 10px 10px 10px;
+            border: 0px solid #000000;
+        }
+    </style>
+    <nav class="navbar navbar-light bg-light static-top">
+        <div class="container">
+            <img class="header" src="{{ asset('img/LOGO1.png') }}">
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="text-center">Ajout d'incidents</h2>
+                <div class="form-incident mt-5">
+                    {{ form_start(form) }}
+
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.description) }}
+
+                    <input type="submit" value="Valider" class="btn btn-outline-success btn-block mt-3 mb-3">
+
+                    {{ form_end(form) }}
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

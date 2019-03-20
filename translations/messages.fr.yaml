@@ -1,2 +1,22 @@
 menu:
   titre: Bonjour et Bienvenue !
+carte:
+  titre: COLLECTE DU VERRE
+  partenaire: En partenariat avec Eco-Emballages, Toulouse Métropole accélère son programme d'installation de récup'verre.
+
+description:
+  titre: Trouver la borne la plus proche de chez vous à Toulouse
+  collecte: La collecte du verre s'effectue en apport volontaire. Il appartient à chacun de déposer bouteilles et bocaux dans les conteneurs verts, installés dans de nombreux endroits de la ville.
+  titre2: Que déposer dans la borne à verre ?
+  deposer:  Les bouteilles, pots, bocaux sans capsule, ni bouchon.
+  circuit: Le circuit du verre  destination Albi
+
+contact:
+  contact: Contactez-nous ?
+
+footer:
+  link1: A propos
+  link2: Contact
+  link3: Termes d'utilisations
+  link4: Politique de confidentialité
+
