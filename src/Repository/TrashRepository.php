@@ -51,6 +51,9 @@ class TrashRepository
         return $code_com;
     }
     public function generateTrashJson($communeName,$address,$zip,$maxCapacity,$actualCapacity,$available,$damaged ){
+        $updatedAvailable = $this->falseToZero($available);
+        $updatedDamaged = $this->falseToZero($damaged);
+
         $gps = $this->getCoordinates($address,$zip);
         $lat = $gps[0]['lat'];
         $lon = $gps[0]['lon'];
@@ -60,7 +63,7 @@ class TrashRepository
         $code_com = $this->getCommuneCode( $communeName);
 
 
-        $json ='}},{"type":"Feature","geometry":{"type":"Point","coordinates":['.$lon.','.$lat.']},"properties":{"commune":"'.$communeName.'","adresse":"'.$address.'","code_com":'.$code_com.',"geo_point_2d":['.$lat.','.$lon.'],"dmt_type":"Verre","id":"'.$idTrash.'","maxCapacity":'.$maxCapacity.',"actualCapacity":'.$actualCapacity.',"available":'.$available.',"damaged":'.$damaged.',"zip":"'.$zip.'"}}]';
+        $json ='}},{"type":"Feature","geometry":{"type":"Point","coordinates":['.$lon.','.$lat.']},"properties":{"commune":"'.$communeName.'","adresse":"'.$address.'","code_com":'.$code_com.',"geo_point_2d":['.$lat.','.$lon.'],"dmt_type":"Verre","id":"'.$idTrash.'","maxCapacity":'.$maxCapacity.',"actualCapacity":'.$actualCapacity.',"available":'.$updatedAvailable.',"damaged":'.$updatedDamaged.',"zip":"'.$zip.'"}}]';
         return $json;
     }
     public function addJsonObject($communeName,$address,$zip,$maxCapacity,$actualCapacity,$available,$damaged){
@@ -104,5 +107,14 @@ class TrashRepository
             file_put_contents('json/recup.js',$file);
         }
 
+    }
+
+    public function falseToZero($value) {
+        if ($value === false) {
+            $value = 0;
+            return $value;
+        } else {
+            return $value;
+        }
     }
 }
