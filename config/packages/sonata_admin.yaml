@@ -1,7 +1,7 @@
 sonata_admin:
 
     title: 'Green World'
-    title_logo: /bundles/sonataadmin/LOGO1.png
+    title_logo: /img/logo_dashboard.png
     dashboard:
         groups:
             Utilisateurs:
