@@ -11,7 +11,7 @@ Site de collecte de verre pour la ville de Toulouse
 Collaborateurs | Nom | Prénom | 
 ------------   | ------------- | ------------- | 
 1 | 	Da Costa   |  Théo
-2	| Lhermite   | Joffrey 
+2	| Lhermitte   | Joffrey 
 3	| Bosson     | Gauthier
 4	| Allalah    | Clément 
 5 | 	Follin    |	Emilie
@@ -72,6 +72,12 @@ Sinon tapez directement cette commande dans votre console
 
 ```bash
 composer install 
+```
+
+Puis, après avoir installer yarn à l'aide du tutorial : https://yarnpkg.com/en/docs/getting-started
+
+```bash
+yarn encore dev
 ```
 
 ### 3ème étape : 
