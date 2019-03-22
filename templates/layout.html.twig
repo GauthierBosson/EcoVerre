@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.css') }}" />
+
+    <!-- LEAFLET -->
+    <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin=""/>-->
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- STYLES CSS -->
+
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/styles-dashboard.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
+
+
+    <!-- JQUERY -->
+    <script src="{{ asset('js/jquery.js') }}" type="text/javascript"></script>
+
+
+{% endblock %}
+
+{% block body %}
+
+    {# Menu du Site #}
+    {% include 'components/_nav.html.twig' %}
+
+    {# Contenu du Site #}
+    {% block content '' %}
+
+    {# Pied de Page #}
+    {% include "components/_footer.html.twig" %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <!-- HTML5 Shiv et Respond JS -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+    {# <script src="{{ asset('js/jquery.js') }}" type="text/javascript"></script> #}
+    <script src="{{ asset('bootstrap/js/bootstrap.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/scripts.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+
+
+
+    <!-- DROPIFY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js"></script>
+
+
+{% endblock %}

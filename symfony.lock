@@ -1,4 +1,16 @@
 {
+    "botman/botman": {
+        "version": "2.4.1"
+    },
+    "botman/driver-telegram": {
+        "version": "1.5.2"
+    },
+    "botman/driver-web": {
+        "version": "1.5.1"
+    },
+    "cocur/slugify": {
+        "version": "v3.2"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -93,23 +105,47 @@
     "egulias/email-validator": {
         "version": "2.1.7"
     },
+    "evenement/evenement": {
+        "version": "v3.0.1"
+    },
     "facebook/webdriver": {
         "version": "1.6.0"
     },
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "geocoder-php/plugin": {
+        "version": "1.1.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "knplabs/knp-menu": {
+        "version": "2.3.0"
+    },
+    "knplabs/knp-menu-bundle": {
+        "version": "v2.2.1"
+    },
+    "lcobucci/jwt": {
+        "version": "3.2.5"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
+    },
+    "mpociot/pipeline": {
+        "version": "1.0.2"
     },
     "nikic/php-parser": {
         "version": "v4.2.1"
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
+    },
+    "opis/closure": {
+        "version": "3.1.6"
+    },
+    "php-http/promise": {
+        "version": "v1.0.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -135,6 +171,40 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "react/cache": {
+        "version": "v0.5.0"
+    },
+    "react/dns": {
+        "version": "v0.4.16"
+    },
+    "react/event-loop": {
+        "version": "v1.1.0"
+    },
+    "react/promise": {
+        "version": "v2.7.1"
+    },
+    "react/promise-timer": {
+        "version": "v1.5.0"
+    },
+    "react/socket": {
+        "version": "v0.8.12"
+    },
+    "react/stream": {
+        "version": "v1.1.0"
+    },
+    "scheb/two-factor-bundle": {
+        "version": "3.16",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.16",
+            "ref": "b5789cd9710e2ee555bf361079b991068a0f640b"
+        },
+        "files": [
+            "config/packages/scheb_two_factor.yaml",
+            "config/routes/scheb_two_factor.yaml"
+        ]
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -146,6 +216,56 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "sonata-project/admin-bundle": {
+        "version": "3.31",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.31",
+            "ref": "0e5931df1732e3dccfba42a20853049e5e9db6ae"
+        },
+        "files": [
+            "config/packages/sonata_admin.yaml",
+            "config/routes/sonata_admin.yaml",
+            "src/Admin/.gitignore"
+        ]
+    },
+    "sonata-project/block-bundle": {
+        "version": "3.15.0"
+    },
+    "sonata-project/cache": {
+        "version": "2.0.1"
+    },
+    "sonata-project/core-bundle": {
+        "version": "3.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.9",
+            "ref": "2f69bd1995730b73a5211a9707622fb25a925df7"
+        },
+        "files": [
+            "config/packages/sonata_core.yaml"
+        ]
+    },
+    "sonata-project/datagrid-bundle": {
+        "version": "2.5.0"
+    },
+    "sonata-project/doctrine-extensions": {
+        "version": "1.2.0"
+    },
+    "sonata-project/doctrine-orm-admin-bundle": {
+        "version": "3.8.3"
+    },
+    "sonata-project/exporter": {
+        "version": "2.0.1"
+    },
+    "sonata-project/google-authenticator": {
+        "version": "2.2.0"
+    },
+    "spatie/macroable": {
+        "version": "1.0.0"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
@@ -323,6 +443,9 @@
     "symfony/polyfill-intl-icu": {
         "version": "v1.10.0"
     },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.10.0"
+    },
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"
     },
@@ -355,6 +478,9 @@
             "config/packages/test/routing.yaml",
             "config/routes.yaml"
         ]
+    },
+    "symfony/security-acl": {
+        "version": "v3.0.1"
     },
     "symfony/security-bundle": {
         "version": "3.3",
@@ -402,6 +528,9 @@
             "config/packages/swiftmailer.yaml",
             "config/packages/test/swiftmailer.yaml"
         ]
+    },
+    "symfony/templating": {
+        "version": "v4.2.4"
     },
     "symfony/test-pack": {
         "version": "v1.0.5"
@@ -480,14 +609,61 @@
             "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
         }
     },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "5880e1fef9f9eb6a523e698a63f8feabcc8b0834"
+        },
+        "files": [
+            "./assets/css/app.css",
+            "./assets/js/app.js",
+            "./config/packages/assets.yaml",
+            "./config/packages/webpack_encore.yaml",
+            "./package.json",
+            "./webpack.config.js"
+        ]
+    },
     "symfony/yaml": {
         "version": "v4.2.3"
+    },
+    "tightenco/collect": {
+        "version": "v5.8.2"
+    },
+    "twig/extensions": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "ddb2e0a77773b7fd75d8d649545f174e664500ab"
+        },
+        "files": [
+            "config/packages/twig_extensions.yaml"
+        ]
     },
     "twig/twig": {
         "version": "v2.6.2"
     },
     "webmozart/assert": {
         "version": "1.4.0"
+    },
+    "willdurand/geocoder": {
+        "version": "4.2.1"
+    },
+    "willdurand/geocoder-bundle": {
+        "version": "5.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "5.0",
+            "ref": "b272ad4fbfcd45a20e7cbfdc4ad1b0e27a62fd3b"
+        },
+        "files": [
+            "config/packages/bazinga_geocoder.yaml"
+        ]
     },
     "zendframework/zend-code": {
         "version": "3.3.1"

@@ -1,0 +1,41 @@
+
+
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Hello OpenstreetmapController!{% endblock %}
+
+{% block body %}
+
+
+
+    <form action="/trash" method="post">
+        <label for="address">Adresse de la poubelle
+        <input type="text" name="address" id="address"></label>
+        <label for="zip">Code postal de la poubelle
+        <input type="text" name="zip" id="zip"></label>
+        <label for="commune">Commune de la poubelle
+        <input type="text" name="commune" id="commune"></label>
+        <input type="submit" name="sender">
+
+    </form>
+    <form action="/trash" method="post">
+        <input type="submit" name="reset" >
+    </form>
+
+
+
+
+
+
+    {% block javascripts %}
+
+
+
+    {% endblock %}
+
+
+{% endblock %}
+
+
