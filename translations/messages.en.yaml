@@ -1,0 +1,23 @@
+menu:
+  titre: Hello and Welcome !
+
+carte:
+    titre: COLLECTION OF GLASS
+    partenaire: In partnership with Eco-Emballages, Toulouse Métropole is accelerating its recycling installation program.
+
+description:
+    titre: Find the nearest terminal in your home in Toulouse
+    collecte: Glass collection is voluntary. It is up to everyone to deposit bottles and jars in green containers, installed in many parts of the city.
+    titre2: What to deposit in the glass terminal?
+    deposer: Bottles, jars, jars without capsules or caps..
+    circuit: The glass circuit destination Albi
+
+contact:
+  contact: Contact us?
+
+footer:
+  link1: About
+  link2: Contact
+  link3: Terms of use
+  link4: Privacy Policy
+
