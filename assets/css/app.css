@@ -79,7 +79,9 @@ header.masthead .overlay {
         font-size: 3rem;
     }
 }
-
+.contact{
+    background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/itCjTBE/green-blue-tech-geometric-polygonal-motion-background-video-low-poly-animation-ultra-hd-4k-3840x2160_sfx2x8qr__F0000.png)!important;
+}
 .showcase .showcase-text {
     padding: 3rem;
 }

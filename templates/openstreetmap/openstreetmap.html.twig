@@ -39,11 +39,11 @@
             position: fixed;
             top: 300px !important;
             bottom: 0;
-            left: 0 !important;
+            left: 70px !important;
             transform: none !important;
             margin: 0;
             border-radius: 0;
-            width: 20%;
+            width: 15%;
         }
 
         #directions {
@@ -69,6 +69,7 @@
             bottom: 0;
             overflow: auto;
             height: 284px;
+            width: 250px;
         }
 
         #errors {
@@ -80,6 +81,7 @@
             top: 90px;
             left: 10px;
         }
+
 
 
 
@@ -169,17 +171,17 @@
                         iconUrl: "{{ asset('/img/delete.png') }}"
                     });
                 }
-             //   var marker = L.marker(latlng,{icon:myIcon});
+                //   var marker = L.marker(latlng,{icon:myIcon});
 
 
 
                 // Detail du Popup
                 if (marker[i].feature.properties.actualCapacity > 1500){
                     var popup = L.popup({
-                        pane: 'fixed',
-                        className: 'popup-fixed',
-                        autoPan: false,
-                    }).setContent('<b><u>Description de la benne</u></b><br>'
+                            pane: 'fixed',
+                            className: 'popup-fixed',
+                            autoPan: false,
+                        }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Adresse : </b>' + marker[i].feature.properties.adresse + '<br>'
                         + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
                         + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + marker[i].feature.properties.adresse + ','
@@ -190,15 +192,15 @@
 
                 }else{
                     var popup = L.popup({
-                        pane: 'fixed',
-                        className: 'popup-fixed',
-                        autoPan: false,
-                    }).setContent('<b><u>Description de la benne</u></b><br>'
+                            pane: 'fixed',
+                            className: 'popup-fixed',
+                            autoPan: false,
+                        }).setContent('<b><u>Description de la benne</u></b><br>'
                         + '<b>Adresse : </b>' + marker[i].feature.properties.adresse + '<br>'
                         + '<b>Commune:</b>' + marker[i].feature.properties.commune + '<br>'
                         + '<b>QRCODE :  </b>' + '<img src="https://qrickit.com/api/qr.php?d=https://www.google.com/maps/place/' + marker[i].feature.properties.adresse + ','
                         + marker[i].feature.properties.zip  + ',' + marker[i].feature.properties.commune + '/@' + marker[i].feature.geometry.coordinates[1] + ',' + marker[i].feature.geometry.coordinates[0] + '"> <br>'
-                        + '<b>Capacité : La poubelle</b>' + '<br>'
+                        + '<b>Capacité : La poubelle n\'est pas pleine</b>' + '<br>'
                         + '<a href="/trash/add_incidents/'+marker[i].feature.properties.id+'">Déclarer un incident</a>')
                     ;
                 }
@@ -206,7 +208,7 @@
 
                 var m = L.marker([marker[i]._latlng.lat, marker[i]._latlng.lng] , {icon: myIcon})
                     .bindPopup(popup)
-                    ;
+                ;
 
                 markerClusters.addLayer( m );
 
@@ -244,15 +246,18 @@
             <div class="col-xl-9 mx-auto">
                 <div id="map" style="height: 400px"></div>
             </div>
+            <div class="col-xl-3">
+                <div id='inputs'></div>
+                <div id="calcul">
+                    <div id='directions'>
+                        <div id='routes'></div>
+                        <div id='instructions'></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div id='inputs'></div>
-    <div id="calcul">
-        <div id='directions'>
-            <div id='routes'></div>
-            <div id='instructions'></div>
-        </div>
-    </div>
+
 
     {% block javascripts %}
 
