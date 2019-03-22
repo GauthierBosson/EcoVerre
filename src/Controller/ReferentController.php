@@ -33,6 +33,8 @@ class ReferentController extends AbstractController
                 $user->setPassword($password);
                 $em=$this->getDoctrine()->getManager();
                 $em->flush();
+
+                $this->redirectToRoute('admin_login');
             } else {
                 return new Response('erreur');
             }
